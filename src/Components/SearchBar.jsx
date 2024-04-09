@@ -58,8 +58,10 @@ const SearchBar = () => {
                   )}
                 <h2>{species.common_name}</h2>
                 <p>Scientific Name: {species.scientific_name.join(", ")}</p>
-                <p>Cycle: {species.cycle}</p>
-                <p>Watering: {species.watering}</p>
+                {/* <p>Cycle: {species.cycle}</p> */}
+                {species.cycle.includes("Upgrade Plans To Premium/Supreme - https://perenual.com/subscription-api-pricing. I'm sorry") ? 'N/A' : <p>Cycle: {species.cycle}</p>}
+                {/* <p>Watering: {species.watering}</p> */}
+                {species.watering.includes("Upgrade Plans To Premium/Supreme - https://perenual.com/subscription-api-pricing. I'm sorry") ? 'N/A' : <p>Watering: {species.watering}</p>}
                 <p>Other Names: {species.other_name ? species.other_name.join(', ') : 'N/A'}</p>
               </li>
             ))}

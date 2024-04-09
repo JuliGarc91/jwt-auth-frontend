@@ -30,11 +30,13 @@ const UsersPlants = () => {
     <div>
       <h2>User's Plants</h2>
       <ul>
+        {/* gotta make route and add component also link to nav to UsersPlant */}
         {userPlants.map(plant => (
           <li key={plant.id}>
             <div>
               <strong>Name:</strong> {plant.name}
             </div>
+            {/* add toggle for additional details */}
             <div>
               <strong>Species:</strong> {plant.species}
             </div>
