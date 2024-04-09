@@ -1,5 +1,5 @@
 import { useOutletContext } from "react-router-dom";
-import UsersPlants from "./UserComponents/UsersPlants";
+// import UsersPlants from "./UserComponents/UsersPlants";
 const Dashboard = ({ handleLogout }) => {
   const { user } = useOutletContext(); // Access user data provided by the Outlet's context
 
@@ -19,7 +19,7 @@ const Dashboard = ({ handleLogout }) => {
       {/* Use user data as needed, for example: */}
 
       <button onClick={handleLogout}>Logout</button>
-      <UsersPlants />
+      {/* <UsersPlants /> */}
     </div>
   );
 };

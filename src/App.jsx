@@ -7,6 +7,7 @@ import Login from "./Components/Login";
 import Dashboard from "./Components/Dashboard";
 import NavBar from "./Components/NavBar";
 import LandingPage from "./Components/LandingPage";
+import UsersPlants from "./Components/UserComponents/UsersPlants";
 
 function App() {
   const navigate = useNavigate();
@@ -43,7 +44,11 @@ function App() {
           {/* Place protected routes here */}
           <Route
             path="/dashboard"
-            element={<Dashboard handleLogout={handleLogout} />}
+            element={
+            <>
+              <Dashboard handleLogout={handleLogout} /> 
+              <UsersPlants/>
+            </>}
           />
         </Route>
       </Routes>

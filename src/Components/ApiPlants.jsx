@@ -1,48 +1,72 @@
 import { useState, useEffect } from 'react';
-// available for all users (even if not logged in)
-const PLANT_API = import.meta.env.VITE_API_BASE_URL;
-function App() {
-  const [speciesList, setSpeciesList] = useState([]);
+import SearchBar from './SearchBar';
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(PLANT_API);
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
+const PLANT_API = import.meta.env.VITE_API_BASE_URL;
+function ApiPlants() {
+    const [allSpecies, setAllSpecies] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        async function fetchSpecies() {
+            try {
+                const response = await fetch(`${PLANT_API}&page=${currentPage}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    setAllSpecies(data.data);
+                } else {
+                    console.error(`Failed to fetch species data for page ${currentPage}`);
+                }
+            } catch (error) {
+                console.error('Error fetching species data:', error);
+            } finally {
+                setIsLoading(false);
+            }
         }
-        const data = await response.json();
-        setSpeciesList(data.data); // Set the species list to the "data" array in the response
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
+
+        fetchSpecies();
+    }, [currentPage]);
+
+    const goToPreviousPage = () => {
+        setCurrentPage(prevPage => Math.max(prevPage - 1, 1));
     };
 
-    fetchData();
-  }, []);
+    const goToNextPage = () => {
+        setCurrentPage(prevPage => prevPage + 1);
+    };
 
-  return (
-    <div>
-      <h1>Species List</h1>
-      <ul>
-        {speciesList.map((species) => (
-          <li key={species.id}>
-            <h2>{species.common_name}</h2>
-            <p>Scientific Name: {species.scientific_name.join(', ')}</p>
-            <p>Cycle: {species.cycle}</p>
+    return (
+        <div>
+          <SearchBar />
+            <h1>Species List</h1>
+            {isLoading ? (
+                <p>Loading...</p>
+            ) : (
+                <>
+                <div>
+                  <button onClick={goToPreviousPage} disabled={currentPage === 1}>Previous Page</button>
+                  <button onClick={goToNextPage}>Next Page</button>
+                </div>
+                <ul>
+                  {allSpecies.map(species => (
+                  <li key={species.id}>
+                    {species.default_image ? (
+                    <img src={species.default_image.regular_url} alt={species.common_name} />
+                  ) : (
+                  <p>No Image Available</p>
+                  )}
+                  <h2>{species.common_name}</h2>
+                  <p>Scientific Name: {species.scientific_name.join(", ")}</p>
+                  <p>Cycle: {species.cycle}</p>
             <p>Watering: {species.watering}</p>
             <p>Other Names: {species.other_name ? species.other_name.join(', ') : 'N/A'}</p>
-            {/* <img src={species.default_image.thumbnail} alt={species.common_name} /> */}
-            {species.default_image ? (
-              <img src={species.default_image.thumbnail} alt={species.common_name} />
-            ) : (
-              <p>No Image Available</p>
+                  </li>
+                  ))}
+                  </ul>
+                </>
             )}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+        </div>
+    );
 }
 
-export default App;
+export default ApiPlants;
