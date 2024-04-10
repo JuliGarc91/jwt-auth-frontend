@@ -40,8 +40,12 @@ div.search-bar {
 div.species-list {
     text-align: center;
 }
-
+div.img-container{
+    max-height: 15rem;
+    max-width: 15rem;
+    overflow: hidden;
+    border-radius: 1.5rem;
+}
 img {
     width: 15rem;
-    border-radius: 1.5rem;
 }

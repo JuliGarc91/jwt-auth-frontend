@@ -38,7 +38,7 @@ const UsersPlants = () => {
             <div>
               <strong>Care Instructions:</strong> {plant.careinstructions}
             </div>
-            <div>
+            <div className='img-container'>
               <img src={plant.imageurl} alt={plant.name} />
             </div>
           </li>
