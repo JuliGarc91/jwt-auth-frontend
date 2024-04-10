@@ -1,34 +1,49 @@
-html, body {
+body {
     background-color: rgba(0, 48, 0, 0.5);
-    color: rgb(200, 255, 182);
+    color: rgb(25, 62, 13);
 }
 section.navbar-container{
     display: flex;
     justify-content: space-between;
     margin: 0;
     background-position: center;
+    width:100%;
 }
 
-a {
+a, li {
     text-decoration: none;
-    color: rgb(200, 255, 182);
+    list-style: none;
+    color:antiquewhite;
 }
 
 div.nav-links {
     display: inline-flex;
     list-style: none;
 }
+main {
+    display: flex;
+    /* justify-items: center;
+    align-items: center; */
+    gap: 1rem;
+}
 section.dashboard {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    text-align: center;
 }
 
-section.api-plants {
-    color: red;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
+ul.user-plants-dashboard {
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1rem;
+}
+
+li {
+    background-color: rgba(0, 0, 0, 0.258);
+    border-radius: 1rem;
+}
+
+strong {
+    color: rgb(200, 255, 182);
+    
 }
 
 div.search-bar {
@@ -40,12 +55,26 @@ div.search-bar {
 div.species-list {
     text-align: center;
 }
+
+
 div.img-container{
     max-height: 15rem;
     max-width: 15rem;
-    overflow: hidden;
     border-radius: 1.5rem;
+    
 }
 img {
     width: 15rem;
+    height: 15rem;
+    overflow: hidden;
+    border-radius: 50%;
+}
+div.plant-details-dashboard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    gap:0.25rem;
+    width:15rem;
 }

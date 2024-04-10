@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import ApiPlants from "./ApiPlants";
+import SearchBar from "./SearchBar";
 
 function LandingPage() {
   const [showPlants, setShowPlants] = useState(false);
@@ -20,7 +20,7 @@ function LandingPage() {
       <Link to="/dashboard">View Your Dashboard</Link>
       </button>
 
-      {showPlants && <ApiPlants />}
+      {showPlants && <SearchBar/>}
       
       {/* <h1>This is Your Landing Page</h1> */}
       {/* Dashboard is a protected component. If you are not logged in and you try 

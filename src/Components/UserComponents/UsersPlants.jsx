@@ -21,16 +21,20 @@ const UsersPlants = () => {
   }, [user.id]);
 
   return (
-    <div>
+    <section>
       <h2>{user.username[0].toUpperCase()}
           {user.username.slice(1).toLowerCase()}'s Plants:</h2>
       
-      <ul>
+      <ul className='user-plants-dashboard'>
         {/* gotta make route and add component also link to nav to UsersPlant */}
         {userPlants.map(plant => (
           
           <li key={plant.id}>
             <Link to={`/plant/${plant.id}`}>
+            <div className='img-container'>
+              <img src={plant.imageurl} alt={plant.name} />
+            </div>
+            <div className='plant-details-dashboard'>
             <div>
               <strong>Name:</strong> {plant.name}
             </div>
@@ -41,8 +45,6 @@ const UsersPlants = () => {
             <div>
               <strong>Care Instructions:</strong> {plant.careinstructions}
             </div>
-            <div className='img-container'>
-              <img src={plant.imageurl} alt={plant.name} />
             </div>
             </Link>
           </li>
@@ -50,7 +52,7 @@ const UsersPlants = () => {
         ))}
       </ul>
       
-    </div>
+    </section>
   );
 }
 

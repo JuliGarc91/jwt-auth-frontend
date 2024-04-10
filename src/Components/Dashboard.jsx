@@ -4,21 +4,15 @@ const Dashboard = ({ handleLogout }) => {
 
   return (
     <>
-    <button onClick={handleLogout}>Logout</button>
+    
     <section className="dashboard">
-      {/* <h2>Dashboard Component</h2> */}
-      
       {user && (
         <h1>
-          Welcome, to your Garden Nook {user.username[0].toUpperCase()}
+          Welcome to your Garden Nook, {user.username[0].toUpperCase()}
           {user.username.slice(1).toLowerCase()}!
+          <button onClick={handleLogout}>Logout</button>
         </h1>
       )}
-
-      {/* Use user data as needed, for example: */}
-
-      
-      {/* <UsersPlants /> */}
     </section>
     </>
   );

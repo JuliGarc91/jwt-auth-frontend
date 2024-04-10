@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const PLANT_API = import.meta.env.VITE_API_BASE_URL;
+// const PLANT_API = import.meta.env.VITE_API_BASE_URL;
 const SearchBar = () => {
     const [filteredSpecies, setFilteredSpecies] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -46,6 +46,7 @@ const SearchBar = () => {
             {isLoading ? (
                 <p>Loading...</p>
               ) : (
+            <section className='species-list'>
               <ul>
                 {filteredSpecies.map(species => (
                 <li key={species.id}>
@@ -56,16 +57,16 @@ const SearchBar = () => {
                     ) : (
                     <img src={species.default_image.regular_url} alt={species.common_name} />
                   )}
-                <h2>{species.common_name}</h2>
-                <p>Scientific Name: {species.scientific_name.join(", ")}</p>
-                {/* <p>Cycle: {species.cycle}</p> */}
-                {species.cycle.includes("Upgrade Plans To Premium/Supreme - https://perenual.com/subscription-api-pricing. I'm sorry") ? 'N/A' : <p>Cycle: {species.cycle}</p>}
-                {/* <p>Watering: {species.watering}</p> */}
-                {species.watering.includes("Upgrade Plans To Premium/Supreme - https://perenual.com/subscription-api-pricing. I'm sorry") ? 'N/A' : <p>Watering: {species.watering}</p>}
-                <p>Other Names: {species.other_name ? species.other_name.join(', ') : 'N/A'}</p>
-              </li>
+                    <h2>{species.common_name}</h2>
+                    <p>Scientific Name: {species.scientific_name.join(", ")}</p>
+
+                    {species.cycle.includes("Upgrade Plans To Premium/Supreme - https://perenual.com/subscription-api-pricing. I'm sorry") ? 'N/A' : <p>Cycle: {species.cycle}</p>}
+                    {species.watering.includes("Upgrade Plans To Premium/Supreme - https://perenual.com/subscription-api-pricing. I'm sorry") ? 'N/A' : <p>Watering: {species.watering}</p>}
+                    <p>Other Names: {species.other_name ? species.other_name.join(', ') : 'N/A'}</p>
+                </li>
             ))}
-            </ul>
+             </ul>
+            </section>
             )}
         </div>
     );
