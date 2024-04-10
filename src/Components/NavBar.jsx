@@ -28,28 +28,34 @@ const NavBar = ({ toggleLogin, handleLogout }) => {
   }, [toggleLogin]);
 
   return (
-    <div className="navbar-container">
-      <h1>Navbar Component</h1>
+    <>
+    <section className="navbar-container">
+      <header>
       <h2>
         <Link style={{ textDecoration: "none" }} to="/">
-          Your image or Logo (click here to go to Landing Page)
+          Garden Nook
         </Link>
       </h2>
-
+      </header>
+      <div className="nav-links">
       {!toggleLogin ? (
         <Link to={"/login"}>
           <span>Login</span>
         </Link>
       ) : (
-        <div>
-          {user && <span>Hello, {user.username.toUpperCase()}? | </span>}
+        <>
+          {user && <span>Hello, {user.username.toUpperCase()} </span>}
           <Link onClick={handleLogout}>
             <span>Logout</span>
-          </Link>
-        </div>
+          </Link></>
       )}
-      <hr />
-    </div>
+      <Link to="/dashboard">|Dashboard</Link>
+      <Link to="/">|Home</Link>
+      </div>
+      
+    </section>
+    <hr />
+    </>
   );
 };
 

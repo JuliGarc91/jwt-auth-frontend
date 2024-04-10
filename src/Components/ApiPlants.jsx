@@ -36,8 +36,9 @@ function ApiPlants() {
     };
 
     return (
-        <div>
+        <section className='api-plants'>
           <SearchBar />
+          <div className='species-list'>
             <h1>Species List</h1>
             {isLoading ? (
                 <p>Loading...</p>
@@ -65,7 +66,8 @@ function ApiPlants() {
                   </ul>
                 </>
             )}
-        </div>
+            </div>
+        </section>
     );
 }
 

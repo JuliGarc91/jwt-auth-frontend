@@ -1,20 +1,15 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import { useOutletContext } from "react-router-dom";
 
-// for some reason not working:
-// const {URL} = import.meta.env.VITE_BASE_URL;
+const URL = import.meta.env.VITE_BASE_URL
 const UsersPlants = () => {
   const [userPlants, setUserPlants] = useState([]);
   const { user } = useOutletContext(); // Access user data provided by the Outlet's context
-  const { userId } = useParams();
-  console.log(user)
 
   useEffect(() => {
-    // if (userId === user.id){
     const fetchUserPlants = async () => {
       try {
-        const response = await fetch(`http://localhost:3003/api/users/${user.id}/userPlants`);
+        const response = await fetch(`${URL}/api/users/${user.id}/userPlants`);
         const data = await response.json();
         setUserPlants(data.userPlants);
       } catch (error) {
@@ -23,12 +18,12 @@ const UsersPlants = () => {
     };
 
     fetchUserPlants();
-    // }
   }, [user.id]);
 
   return (
     <div>
-      <h2>User's Plants</h2>
+      <h2>{user.username[0].toUpperCase()}
+          {user.username.slice(1).toLowerCase()}'s Plants:</h2>
       <ul>
         {/* gotta make route and add component also link to nav to UsersPlant */}
         {userPlants.map(plant => (

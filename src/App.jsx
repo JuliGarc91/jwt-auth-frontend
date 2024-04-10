@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
-
 import ProtectedRoute from "./Components/ProtectedRoute";
 import Register from "./Components/Register";
 import Login from "./Components/Login";
@@ -8,6 +7,7 @@ import Dashboard from "./Components/Dashboard";
 import NavBar from "./Components/NavBar";
 import LandingPage from "./Components/LandingPage";
 import UsersPlants from "./Components/UserComponents/UsersPlants";
+import "./App.css";
 
 function App() {
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ function App() {
         toggleLogin={toggleLogin}
         setToggleLogin={setToggleLogin}
       />
-
+      <main>
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route
@@ -39,7 +39,6 @@ function App() {
           path="/register"
           element={<Register setToggleLogin={setToggleLogin} />}
         />
-
         <Route element={<ProtectedRoute />}>
           {/* Place protected routes here */}
           <Route
@@ -52,6 +51,7 @@ function App() {
           />
         </Route>
       </Routes>
+      </main>
     </>
   );
 }
