@@ -1,14 +1,22 @@
 html, body {
+    background-color: rgba(0, 48, 0, 0.5);
+    color: rgb(200, 255, 182);
 }
 section.navbar-container{
     display: flex;
     justify-content: space-between;
     margin: 0;
-    /* background-color: black; */
     background-position: center;
 }
+
+a {
+    text-decoration: none;
+    color: rgb(200, 255, 182);
+}
+
 div.nav-links {
     display: inline-flex;
+    list-style: none;
 }
 section.dashboard {
     display: grid;
@@ -31,4 +39,9 @@ div.search-bar {
 }
 div.species-list {
     text-align: center;
+}
+
+img {
+    width: 15rem;
+    border-radius: 1.5rem;
 }
