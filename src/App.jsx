@@ -7,6 +7,7 @@ import Dashboard from "./Components/Dashboard";
 import NavBar from "./Components/NavBar";
 import LandingPage from "./Components/LandingPage";
 import UsersPlants from "./Components/UserComponents/UsersPlants";
+import UsersPlant from "./Components/UserComponents/UsersPlant";
 import "./App.css";
 
 function App() {
@@ -48,6 +49,10 @@ function App() {
               <Dashboard handleLogout={handleLogout} /> 
               <UsersPlants/>
             </>}
+          />
+          <Route 
+            path="/plant/:id"
+            element={<UsersPlant/>}
           />
         </Route>
       </Routes>

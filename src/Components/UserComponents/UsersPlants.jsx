@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useOutletContext } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 
 const URL = import.meta.env.VITE_BASE_URL
 const UsersPlants = () => {
@@ -24,10 +24,13 @@ const UsersPlants = () => {
     <div>
       <h2>{user.username[0].toUpperCase()}
           {user.username.slice(1).toLowerCase()}'s Plants:</h2>
+      
       <ul>
         {/* gotta make route and add component also link to nav to UsersPlant */}
         {userPlants.map(plant => (
+          
           <li key={plant.id}>
+            <Link to={`/plant/${plant.id}`}>
             <div>
               <strong>Name:</strong> {plant.name}
             </div>
@@ -41,9 +44,12 @@ const UsersPlants = () => {
             <div className='img-container'>
               <img src={plant.imageurl} alt={plant.name} />
             </div>
+            </Link>
           </li>
+          
         ))}
       </ul>
+      
     </div>
   );
 }
