@@ -9,6 +9,7 @@ import LandingPage from "./Components/LandingPage";
 import UsersPlants from "./Components/UserComponents/UsersPlants";
 import UsersPlant from "./Components/UserComponents/UsersPlant";
 import "./App.css";
+import AddNewPlantForm from "./Components/UserComponents/AddNewPlant";
 
 function App() {
   const navigate = useNavigate();
@@ -53,6 +54,10 @@ function App() {
           <Route 
             path="/plant/:id"
             element={<UsersPlant/>}
+          />
+          <Route
+            path="/addnewplant"
+            element={<AddNewPlantForm/>}
           />
         </Route>
       </Routes>

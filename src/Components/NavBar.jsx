@@ -31,11 +31,11 @@ const NavBar = ({ toggleLogin, handleLogout }) => {
     <>
     <section className="navbar-container">
       <header>
-      <h2>
-        <Link style={{ textDecoration: "none" }} to="/">
+      <h1>
+        <Link to="/">
           Garden Nook
         </Link>
-      </h2>
+      </h1>
       </header>
       <div className="nav-links">
       {!toggleLogin ? (
@@ -44,13 +44,13 @@ const NavBar = ({ toggleLogin, handleLogout }) => {
         </Link>
       ) : (
         <>
-          {user && <span>Hello, {user.username.toUpperCase()} </span>}
+          {user && <span>Hello, {user.username.toUpperCase()}&nbsp;&nbsp;&nbsp;</span>}
           <Link onClick={handleLogout}>
-            <span>Logout</span>
+            <span>Logout&nbsp;</span>
           </Link></>
       )}
-      <Link to="/dashboard">|Dashboard</Link>
-      <Link to="/">|Home</Link>
+      <Link to="/dashboard">|&nbsp;Dashboard&nbsp;</Link>
+      <Link to="/">|&nbsp;Home&nbsp;</Link>
       </div>
       
     </section>

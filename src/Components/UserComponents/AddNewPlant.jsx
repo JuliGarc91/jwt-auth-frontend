@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useOutletContext, useNavigate } from "react-router-dom";
 
-const addNewPlantForm = ({plant}) => {
+const AddNewPlantForm = () => {
+
   return (
     <div>addNewPlantForm</div>
   )
 }
 
-export default addNewPlantForm;
+export default AddNewPlantForm;

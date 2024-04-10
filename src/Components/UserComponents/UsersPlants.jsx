@@ -20,33 +20,49 @@ const UsersPlants = () => {
     fetchUserPlants();
   }, [user.id]);
 
+  const handleDeletePlant = async (userId, plantId) => {
+    try {
+      const response = await fetch(`${URL}/api/users/${userId}/userPlants/${plantId}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        setUserPlants(userPlants.filter(plant => plant.id !== plantId));
+      } else {
+        console.error('Failed to delete user plant:');
+      }
+    } catch (error) {
+      console.error('Error deleting user plant:', error);
+    }
+  };
+
   return (
     <section>
       <h2>{user.username[0].toUpperCase()}
           {user.username.slice(1).toLowerCase()}'s Plants:</h2>
       
       <ul className='user-plants-dashboard'>
-        {/* gotta make route and add component also link to nav to UsersPlant */}
         {userPlants.map(plant => (
           
           <li key={plant.id}>
-            <Link to={`/plant/${plant.id}`}>
+            
             <div className='img-container'>
               <img src={plant.imageurl} alt={plant.name} />
             </div>
-            <div className='plant-details-dashboard'>
+            <div className='all-plants-details-dashboard'>
             <div>
               <strong>Name:</strong> {plant.name}
             </div>
-            {/* add toggle for additional details */}
-            <div>
-              <strong>Species:</strong> {plant.species}
+            <button onClick={() => handleDeletePlant(user.id, plant.id)}>
+              Delete
+            </button>
+            <button>
+              <Link to={`/plant/${plant.id}`}>
+              View More Details
+              </Link>
+            </button>
             </div>
-            <div>
-              <strong>Care Instructions:</strong> {plant.careinstructions}
-            </div>
-            </div>
-            </Link>
+            
           </li>
           
         ))}
