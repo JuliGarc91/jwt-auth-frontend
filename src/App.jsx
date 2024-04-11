@@ -55,10 +55,10 @@ function App() {
             path="/plant/:id"
             element={<UsersPlant/>}
           />
-          <Route
+          {/* <Route
             path="/addnewplant"
             element={<AddNewPlantForm/>}
-          />
+          /> */}
         </Route>
       </Routes>
       </main>

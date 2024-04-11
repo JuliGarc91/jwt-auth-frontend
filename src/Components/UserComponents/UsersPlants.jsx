@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useOutletContext } from "react-router-dom";
+// import AddNewPlant from './AddNewPlant';
 
 const URL = import.meta.env.VITE_BASE_URL
 const UsersPlants = () => {
@@ -32,12 +33,13 @@ const UsersPlants = () => {
         console.error('Failed to delete user plant:');
       }
     } catch (error) {
-      console.error('Error deleting user plant:', error);
+      console.error("Error deleting user's plant:", error);
     }
   };
 
   return (
     <section>
+      {/* <AddNewPlant/> */}
       <h2>{user.username[0].toUpperCase()}
           {user.username.slice(1).toLowerCase()}'s Plants:</h2>
       

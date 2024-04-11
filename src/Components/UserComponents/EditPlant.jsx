@@ -3,33 +3,24 @@ import { useOutletContext, useNavigate } from "react-router-dom";
 
 const URL = import.meta.env.VITE_BASE_URL;
 
-const AddNewPlant = ({onAddPlant}) => {
+const EditPlant = ({ plant }) => {
     const { user } = useOutletContext(); // access logged in user details such as id and username
     const navigate = useNavigate();
 
     const [plantData, setPlantData] = useState({
         userid: user.id,
         username: user.username,
-        name: "",
-        species: "",
-        careinstructions: "",
-        imageurl: ""
+        name: plant ? plant.name : "",
+        species: plant ? plant.species : "",
+        careinstructions: plant ? plant.careinstructions : "",
+        imageurl: plant ? plant.imageurl : ""
     });
-
-    // useEffect(() => {
-    //     if (updatedData) {
-    //         // If updatedData is not null, it means form submission is successful and new data is fetched
-    //         // You can do any post-submission logic here, like displaying a success message
-    //         console.log("New plant added:", updatedData);
-    //         navigate('/dashboard');
-    //     }
-    // }, [updatedData, navigate]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch(`${URL}/api/users/${user.id}/userPlants`, {
-                method: 'POST',
+            const response = await fetch(`${URL}/api/users/${user.id}/userPlants/${plant.id}`, {
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -37,21 +28,13 @@ const AddNewPlant = ({onAddPlant}) => {
             });
             if (response.ok) {
                 const data = await response.json();
-                console.log("New plant added:", data.plant); // Add this line
-                onAddPlant(data.plant); // Update userPlants state in Dashboard component
-                setPlantData({
-                    userid: user.id,
-                    username: user.username,
-                    name: "",
-                    species: "",
-                    careinstructions: "",
-                    imageurl: ""
-                });
+                console.log('Plant added:', data.plant);
+                navigate(`/dashboard`);
             } else {
-                console.error('Failed to add plant:', error);
+                console.error('Failed to edit plant:', error);
             }
         } catch (error) {
-            console.error('Error adding plant:', error);
+            console.error('Error editing plant:', error);
         }
     };
 
@@ -98,9 +81,9 @@ const AddNewPlant = ({onAddPlant}) => {
                 onChange={handleInputChange}
             />
         
-            <button type="submit">Add Plant</button>
+            <button type="submit">Edit Plant Details</button>
         </form>
     );
 };
 
-export default AddNewPlant;
+export default EditPlant;

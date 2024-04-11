@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useOutletContext, useParams } from "react-router-dom";
 import Dashboard from '../Dashboard';
+import EditPlant from './EditPlant';
 
 const URL = import.meta.env.VITE_BASE_URL
 const UsersPlant = () => {
@@ -59,6 +60,7 @@ const UsersPlant = () => {
               <p><strong>Care Instructions:</strong> {plant.careinstructions}</p>
             </div>
     </div>
+      <EditPlant plant={plant}/>
     </section>
     </>
   );  
