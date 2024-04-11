@@ -4,10 +4,15 @@ import Dashboard from '../Dashboard';
 import EditPlant from './EditPlant';
 
 const URL = import.meta.env.VITE_BASE_URL
-const UsersPlant = () => {
+const UsersPlant = ({handleLogout}) => {
   const [plant, setPlant] = useState(null);
+  const [showEditPlantForm, setShowEditPlantForm] = useState(false);
   const { user } = useOutletContext(); // Access user data provided by the Outlet's context
   const { id } = useParams();
+
+  const toggleEditPlantForm = () => {
+    setShowEditPlantForm(!showEditPlantForm);
+  }
 
   useEffect(() => {
     const fetchPlant = async () => {
@@ -36,8 +41,8 @@ const UsersPlant = () => {
   }
 
   return (
-    <>
-    <Dashboard />
+  <>
+    <Dashboard handleLogout={handleLogout}/>
     <section className='user-plant-dashboard'>
       <h2>Plant Details</h2>
       {/* <p>Name: {plant.name}</p>
@@ -46,23 +51,31 @@ const UsersPlant = () => {
       <img src={plant.imageurl} alt={plant.name} /> */}
       {/* will contain plant log component, edit plant form component and delete plant component */}
       <div className='img-container'>
-              <img src={plant.imageurl} alt={plant.name} />
-            </div>
-            <div className='plant-details-dashboard'>
-            <div>
-              <p><strong>Name:</strong> {plant.name}</p>
-            </div>
-            {/* add toggle for additional details */}
-            <div>
-              <p><strong>Species:</strong> {plant.species}</p>
-            </div>
-            <div>
-              <p><strong>Care Instructions:</strong> {plant.careinstructions}</p>
-            </div>
-    </div>
-      <EditPlant plant={plant}/>
+        <img src={plant.imageurl} alt={plant.name} />
+        </div>
+          <div className='plant-details-dashboard'>
+        <div>
+          <p>
+            <strong>Name:</strong> {plant.name}
+          </p>
+        </div>
+        <div>
+          <p>
+            <strong>Species:</strong> {plant.species}
+          </p>
+        </div>
+        <div>
+          <p>
+            <strong>Care Instructions:</strong> {plant.careinstructions}
+          </p>
+        </div>
+        <button onClick={toggleEditPlantForm}>
+          {showEditPlantForm ? "Hide Form" : "Edit Plant"}
+        </button>
+        {showEditPlantForm && <EditPlant plant={plant} />}
+      </div>
     </section>
-    </>
+  </>
   );  
 };
 

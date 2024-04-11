@@ -47,6 +47,8 @@ const EditPlant = ({ plant }) => {
     };
 
     return (
+        <>
+        <h3>Edit Plant</h3>
         <form onSubmit={handleSubmit}>
             <label htmlFor="name">Plant Name:</label>
             <input
@@ -80,9 +82,9 @@ const EditPlant = ({ plant }) => {
                 value={plantData.imageurl}
                 onChange={handleInputChange}
             />
-        
             <button type="submit">Edit Plant Details</button>
         </form>
+        </>
     );
 };
 

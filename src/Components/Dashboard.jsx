@@ -5,14 +5,18 @@ import AddNewPlant from "./UserComponents/AddNewPlant";
 const Dashboard = ({ handleLogout }) => {
   const { user } = useOutletContext(); // Access user data provided by the Outlet's context
   const [userPlants, setUserPlants] = useState([]);
+  const [showAddPlantForm, setShowAddPlantForm] = useState(false);
+
+  const toggleAddPlant = () => {
+    setShowAddPlantForm(!showAddPlantForm);
+  }
   
   const handleAddPlant = (newPlant) => {
       setUserPlants([...userPlants, newPlant]);
   };
-  return (
-    
-    <section className="dashboard">
-      <>
+return (
+  <section className="dashboard">
+    <>
       {user && (
         <h1>
           Welcome to your Garden Nook, {user.username[0].toUpperCase()}
@@ -22,11 +26,12 @@ const Dashboard = ({ handleLogout }) => {
       )}
       <button onClick={handleLogout}>Logout</button>
       <br/>
-      {/* <button><Link to="/addnewplant">Add Plant</Link></button> */}
-      <AddNewPlant onAddPlant={handleAddPlant}/>
-      </>
-
-    </section>
+      <button onClick={toggleAddPlant}>
+        {showAddPlantForm ? "Hide Form" : "Add Plant"}
+      </button>
+      {showAddPlantForm && <AddNewPlant onAddPlant={handleAddPlant} />}
+    </>
+  </section>
   );
 };
 

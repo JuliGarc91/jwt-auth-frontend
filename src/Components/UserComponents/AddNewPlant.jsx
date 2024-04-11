@@ -54,7 +54,9 @@ const AddNewPlant = ({onAddPlant}) => {
         });
     };
 
-    return (
+return (
+    <>
+        <h3>Add Plant</h3>
         <form onSubmit={handleSubmit}>
             <label htmlFor="name">Plant Name:</label>
             <input
@@ -91,6 +93,7 @@ const AddNewPlant = ({onAddPlant}) => {
         
             <button type="submit">Add Plant</button>
         </form>
+    </>
     );
 };
 

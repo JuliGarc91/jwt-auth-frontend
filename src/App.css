@@ -28,6 +28,7 @@ main {
     align-items: center; */
     gap: 1rem;
 }
+
 /* section.dashboard {
     text-align: center;
 } */
@@ -50,22 +51,30 @@ strong {
     
 }
 
-div.search-bar {
+div.search-bar, form {
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-content: center;
+    gap: 0.5rem;
+    color:antiquewhite;
+}
+
+form {
+    background-color: rgba(0, 0, 0, 0.258);
+    border-radius: 0.5rem;
 }
 
 div.species-list {
     text-align: center;
 }
 
-
 /* div.img-container{
     max-height: 15rem;
     max-width: 15rem;
 } */
+
 img {
     width: 15rem;
     height: 15rem;
@@ -73,6 +82,7 @@ img {
     border-radius: 50%;
     padding: 1rem 1rem 1rem 1rem;
 }
+
 div.all-plants-details-dashboard, div.plant-details-dashboard {
     display: flex;
     flex-direction: column;

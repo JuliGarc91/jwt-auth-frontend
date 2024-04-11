@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Link, useOutletContext } from "react-router-dom";
-// import AddNewPlant from './AddNewPlant';
 
 const URL = import.meta.env.VITE_BASE_URL
 const UsersPlants = () => {
@@ -39,15 +38,11 @@ const UsersPlants = () => {
 
   return (
     <section>
-      {/* <AddNewPlant/> */}
       <h2>{user.username[0].toUpperCase()}
           {user.username.slice(1).toLowerCase()}'s Plants:</h2>
-      
       <ul className='user-plants-dashboard'>
         {userPlants.map(plant => (
-          
           <li key={plant.id}>
-            
             <div className='img-container'>
               <img src={plant.imageurl} alt={plant.name} />
             </div>
@@ -59,17 +54,12 @@ const UsersPlants = () => {
               Delete
             </button>
             <button>
-              <Link to={`/plant/${plant.id}`}>
-              View More Details
-              </Link>
+              <Link to={`/plant/${plant.id}`}>View More Details</Link>
             </button>
             </div>
-            
           </li>
-          
         ))}
       </ul>
-      
     </section>
   );
 }
