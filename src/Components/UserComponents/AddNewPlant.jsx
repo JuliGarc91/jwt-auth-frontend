@@ -16,44 +16,35 @@ const AddNewPlant = ({onAddPlant}) => {
         imageurl: ""
     });
 
-    // useEffect(() => {
-    //     if (updatedData) {
-    //         // If updatedData is not null, it means form submission is successful and new data is fetched
-    //         // You can do any post-submission logic here, like displaying a success message
-    //         console.log("New plant added:", updatedData);
-    //         navigate('/dashboard');
-    //     }
-    // }, [updatedData, navigate]);
-
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        try {
-            const response = await fetch(`${URL}/api/users/${user.id}/userPlants`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(plantData),
-            });
+        fetch(`${URL}/api/users/${user.id}/userPlants`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(plantData),
+        })
+        .then(response => {
             if (response.ok) {
-                const data = await response.json();
-                console.log("New plant added:", data.plant); // Add this line
-                onAddPlant(data.plant); // Update userPlants state in Dashboard component
-                setPlantData({
-                    userid: user.id,
-                    username: user.username,
-                    name: "",
-                    species: "",
-                    careinstructions: "",
-                    imageurl: ""
-                });
+                return response.json();
             } else {
-                console.error('Failed to add plant:', error);
+                throw new Error('Failed to add plant:', error);
             }
-        } catch (error) {
+        })
+        .then(data => {
+            console.log("New plant added:", data.plant);
+            onAddPlant(data.plant);
+            return data.plant;
+        })
+        .then(addedPlant => {
+            navigate(`/plant/${addedPlant.id}`);
+        })
+        .catch(error => {
             console.error('Error adding plant:', error);
-        }
+        });
     };
+    
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;

@@ -5,7 +5,7 @@ import AddNewPlant from "./UserComponents/AddNewPlant";
 const Dashboard = ({ handleLogout }) => {
   const { user } = useOutletContext(); // Access user data provided by the Outlet's context
   const [userPlants, setUserPlants] = useState([]);
-
+  
   const handleAddPlant = (newPlant) => {
       setUserPlants([...userPlants, newPlant]);
   };
