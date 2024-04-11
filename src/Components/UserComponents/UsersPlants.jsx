@@ -38,8 +38,8 @@ const UsersPlants = () => {
 
   return (
     <section>
-      <h2>{user.username[0].toUpperCase()}
-          {user.username.slice(1).toLowerCase()}'s Plants:</h2>
+      {/* <h2>{user.username[0].toUpperCase()}
+          {user.username.slice(1).toLowerCase()}'s Plants:</h2> */}
       <ul className='user-plants-dashboard'>
         {userPlants.map(plant => (
           <li key={plant.id}>

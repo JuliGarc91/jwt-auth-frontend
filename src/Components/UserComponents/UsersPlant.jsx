@@ -41,7 +41,7 @@ const UsersPlant = ({handleLogout}) => {
   }
 
   return (
-  <>
+  <section className="plant-details-main">
     <Dashboard handleLogout={handleLogout}/>
     <section className='user-plant-dashboard'>
       <h2>Plant Details</h2>
@@ -53,29 +53,30 @@ const UsersPlant = ({handleLogout}) => {
       <div className='img-container'>
         <img src={plant.imageurl} alt={plant.name} />
         </div>
-          <div className='plant-details-dashboard'>
-        <div>
+          <div>
+        
           <p>
             <strong>Name:</strong> {plant.name}
           </p>
-        </div>
-        <div>
+        
+        
           <p>
             <strong>Species:</strong> {plant.species}
           </p>
-        </div>
-        <div>
+        
+        
           <p>
             <strong>Care Instructions:</strong> {plant.careinstructions}
           </p>
-        </div>
-        <button onClick={toggleEditPlantForm}>
+          <button onClick={toggleEditPlantForm}>
           {showEditPlantForm ? "Hide Form" : "Edit Plant"}
         </button>
+        
+        
         {showEditPlantForm && <EditPlant plant={plant} />}
       </div>
     </section>
-  </>
+  </section>
   );  
 };
 

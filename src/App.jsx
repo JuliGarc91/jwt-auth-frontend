@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import Register from "./Components/Register";
 import Login from "./Components/Login";
@@ -9,9 +9,9 @@ import LandingPage from "./Components/LandingPage";
 import UsersPlants from "./Components/UserComponents/UsersPlants";
 import UsersPlant from "./Components/UserComponents/UsersPlant";
 import "./App.css";
-import AddNewPlantForm from "./Components/UserComponents/AddNewPlant";
 
 function App() {
+  const location = useLocation();
   const navigate = useNavigate();
   const [toggleLogin, setToggleLogin] = useState(false);
 
@@ -22,6 +22,8 @@ function App() {
 
     navigate("/login");
   }
+// useLocation for conditional rendering of views and use wrap component like in mod 3 project
+const isDashboardPage = location.pathname === '/dashboard';
 
   return (
     <>
@@ -30,7 +32,8 @@ function App() {
         toggleLogin={toggleLogin}
         setToggleLogin={setToggleLogin}
       />
-      <main>
+      <main className={isDashboardPage ? 'dashboard-container' : ''}>
+      {/* <h2>Welcome to GardenNook</h2> */}
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route

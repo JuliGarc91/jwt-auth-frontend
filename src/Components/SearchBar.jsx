@@ -46,10 +46,10 @@ const SearchBar = () => {
             {isLoading ? (
                 <p>Loading...</p>
               ) : (
-            <section className='species-list'>
-              <ul>
+            <section>
+              <ul className='species-list'>
                 {filteredSpecies.map(species => (
-                <li key={species.id}>
+                <li key={species.id} className='species-list'>
                   {!species.default_image || (species.watering.includes("Upgrade Plans To Premium/Supreme - https://perenual.com/subscription-api-pricing. I'm sorry") &&
                   species.cycle.includes("Upgrade Plans To Premium/Supreme - https://perenual.com/subscription-api-pricing. I'm sorry")
                     ) ? (
@@ -58,11 +58,13 @@ const SearchBar = () => {
                     <img src={species.default_image.regular_url} alt={species.common_name} />
                   )}
                     <h2>{species.common_name}</h2>
-                    <p>Scientific Name: {species.scientific_name.join(", ")}</p>
+                    <p>
+                        <strong>Scientific Name:</strong> {species.scientific_name.join(", ")}
+                    </p>
 
-                    {species.cycle.includes("Upgrade Plans To Premium/Supreme - https://perenual.com/subscription-api-pricing. I'm sorry") ? 'N/A' : <p>Cycle: {species.cycle}</p>}
-                    {species.watering.includes("Upgrade Plans To Premium/Supreme - https://perenual.com/subscription-api-pricing. I'm sorry") ? 'N/A' : <p>Watering: {species.watering}</p>}
-                    <p>Other Names: {species.other_name ? species.other_name.join(', ') : 'N/A'}</p>
+                    {species.cycle.includes("Upgrade Plans To Premium/Supreme - https://perenual.com/subscription-api-pricing. I'm sorry") ? <p><strong>Cycle:</strong> N/A</p> : <p><strong>Cycle:</strong> {species.cycle}</p>}
+                    {species.watering.includes("Upgrade Plans To Premium/Supreme - https://perenual.com/subscription-api-pricing. I'm sorry") ? <p><strong>Watering:</strong> N/A</p> : <p><strong>Watering:</strong> {species.watering}</p>}
+                    <p><strong>Other Names:</strong> {species.other_name.length > 0 ? <p>{species.other_name.join(', ')}</p> : 'N/A'}</p>
                 </li>
             ))}
              </ul>
