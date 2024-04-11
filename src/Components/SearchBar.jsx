@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-// const PLANT_API = import.meta.env.VITE_API_BASE_URL;
+const PLANT_API = import.meta.env.VITE_API_BASE_URL;
 const SearchBar = () => {
     const [filteredSpecies, setFilteredSpecies] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -46,8 +46,8 @@ const SearchBar = () => {
             {isLoading ? (
                 <p>Loading...</p>
               ) : (
-            <section>
-              <ul className='species-list'>
+            <section className='api-plants'>
+              <ul className='species-list api-plants'>
                 {filteredSpecies.map(species => (
                 <li key={species.id} className='species-list'>
                   {!species.default_image || (species.watering.includes("Upgrade Plans To Premium/Supreme - https://perenual.com/subscription-api-pricing. I'm sorry") &&

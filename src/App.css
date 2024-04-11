@@ -24,20 +24,24 @@ div.nav-links {
     display: inline-flex;
     list-style: none;
 }
+ul.api-plants  {
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 1rem;
+    margin: auto;
+    width:85vw;
+}
 section.plant-details-main {
     display: flex;
     justify-items: center;
     align-items: center;
 }
-main {
-    margin: auto;
-    width:min-content;
-}
+
 main.dashboard-container {
     display: flex;
     /* display: grid;
     grid-template-columns: 1fr 1fr 1fr; */
-    margin:auto;
+    margin:0;
     gap: 1rem;
     width: min-content;
 }
