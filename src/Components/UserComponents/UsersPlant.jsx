@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useOutletContext, useParams } from "react-router-dom";
+import { Link, useOutletContext, useParams } from "react-router-dom";
 import Dashboard from '../Dashboard';
 import EditPlant from './EditPlant';
 
@@ -68,6 +68,9 @@ const UsersPlant = ({handleLogout}) => {
           <p>
             <strong>Care Instructions:</strong> {plant.careinstructions}
           </p>
+          <button>
+            <Link to={`/plant/{plant.id}/carelogs`}>Plant Care Logs</Link>
+          </button>
           <button onClick={toggleEditPlantForm}>
           {showEditPlantForm ? "Hide Form" : "Edit Plant"}
         </button>

@@ -8,7 +8,9 @@ import NavBar from "./Components/NavBar";
 import LandingPage from "./Components/LandingPage";
 import UsersPlants from "./Components/UserComponents/UsersPlants";
 import UsersPlant from "./Components/UserComponents/UsersPlant";
+import CareLogs from "./Components/UserComponents/CareLogs";
 import "./App.css";
+
 
 function App() {
   const location = useLocation();
@@ -58,10 +60,10 @@ const isDashboardPage = location.pathname === '/dashboard';
             path="/plant/:id"
             element={<UsersPlant/>}
           />
-          {/* <Route
-            path="/addnewplant"
-            element={<AddNewPlantForm/>}
-          /> */}
+          <Route 
+            path="/plant/:plantId/carelogs"
+            element={<CareLogs/>}
+          />
         </Route>
       </Routes>
       </main>
