@@ -3,7 +3,7 @@ import { Link, useOutletContext, useParams } from "react-router-dom";
 
 const URL = import.meta.env.VITE_BASE_URL;
 const CareLogs = () => {
-    const [careLogs, setCareLogs] = useState(null);
+    const [careLogs, setCareLogs] = useState([]);
     const { user } = useOutletContext(); // access logged in user details such as id and username
     const { plantId } = useParams();
     console.log(plantId);
@@ -13,6 +13,7 @@ const CareLogs = () => {
             try {
                 const response = await fetch(`${URL}/api/users/${user.id}/userPlants/${plantId}/carelogs`);
                 const data = await response.json();
+                console.log(data)
                 setCareLogs(data.careLogs);
             } catch (error) {
                 console.error ('Error fetching user plants:', error);
@@ -20,7 +21,7 @@ const CareLogs = () => {
         };
         fetchCareLogs();
     }, [user.id, plantId]);
-
+    
 /*
 INSERT INTO careLogs (plantId, careDate, description, imageUrl, soilIsMoist, needsWaterToday, pottedPlant, needsRepotting, rootsHealthy, wateringFrequencyPerWeek, sunlightHoursPerDay)
 VALUES
@@ -36,13 +37,13 @@ VALUES
                 <li key={careLog.id}>
                     <img src={careLog.imageurl} alt={'pic not available'} />
                     <div>
-                        <strong>Date: </strong>{careLog.careDate}
+                        <strong>Date: </strong>{careLog.caredate}
                     </div>
                     <div>
                         <strong>Notes: </strong>{careLog.description}
                     </div>
                 </li>
-            ))};
+            ))}
         </ul>
     </section>
   );
