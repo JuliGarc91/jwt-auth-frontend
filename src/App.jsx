@@ -10,6 +10,7 @@ import UsersPlants from "./Components/UserComponents/UsersPlants";
 import UsersPlant from "./Components/UserComponents/UsersPlant";
 import CareLogs from "./Components/UserComponents/CareLogs";
 import "./App.css";
+import CareLog from "./Components/UserComponents/CareLog";
 
 
 function App() {
@@ -63,6 +64,10 @@ const isDashboardPage = location.pathname === '/dashboard';
           <Route 
             path="/plant/:plantId/carelogs"
             element={<CareLogs/>}
+          />
+          <Route
+            path="/plant/:plantId/carelogs/:id"
+            element={<CareLog />}
           />
         </Route>
       </Routes>
