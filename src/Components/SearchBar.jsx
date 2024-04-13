@@ -13,10 +13,6 @@ const SearchBar = () => {
                 if (response.ok) {
                     const data = await response.json();
                     setFilteredSpecies(data.data);
-                  //   setFilteredSpecies(data.data.filter(species => 
-                  //     !species.watering.includes("Upgrade Plans To Premium/Supreme - https://perenual.com/subscription-api-pricing. I'm sorry") &&
-                  //     !species.cycle.includes("Upgrade Plans To Premium/Supreme - https://perenual.com/subscription-api-pricing. I'm sorry")
-                  // ));
                 } else {
                     console.error('Failed to fetch species data');
                 }

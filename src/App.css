@@ -34,6 +34,16 @@ div.nav-links {
     list-style: none;
 }
 
+div.welcome{
+    background-color: rgba(0, 0, 0, 0.258);
+    margin-top: 1rem;
+    padding-bottom: 2rem;
+}
+
+div.welcome h3, p.welcome {
+    color:rgb(246, 203, 153);
+}
+
 button {
     margin-bottom: 1rem;
 }
@@ -92,7 +102,7 @@ li {
     align-items: center;
     gap:0.5rem;
     width:24rem;
-    height:40rem;
+    height:40.5rem;
 }
 
 ul  {
@@ -122,9 +132,10 @@ section.user-plant-dashboard {
     flex-direction: column;
     align-items: center;
     margin: auto;
+    margin-bottom: 4rem;
 }
 
-div.search-bar, form {
+div.search-bar {
     margin-top: 1rem;
     padding: 1rem;
     margin: auto;
@@ -139,6 +150,14 @@ div.search-bar, form {
 }
 
 form {
-    background-color: rgba(0, 0, 0, 0.647);
+    padding: 1rem;
+    gap: 0.5rem;
+    color:rgb(251, 220, 180);
+    background-color: rgba(0, 0, 0, 0.258);
+    /* background-color: rgba(0, 0, 0, 0.647); */
     border-radius: 0.5rem;
+    margin: auto;
+    display: flex;
+    width: 50vw;
+    flex-direction: column;
 }

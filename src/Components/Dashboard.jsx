@@ -16,21 +16,21 @@ const Dashboard = ({ handleLogout, children }) => {
   };
 return (
   <section className="dashboard">
-    <>
+    <div className="welcome">
       {user && (
         <h2>
           Welcome to your Garden Nook, {user.username[0].toUpperCase()}
           {user.username.slice(1).toLowerCase()}!
-          
         </h2>
       )}
+    
       <button onClick={handleLogout}>Logout</button>
       <button onClick={toggleAddPlant}>
         {showAddPlantForm ? "Hide Form" : "Add Plant"}
       </button>
       {showAddPlantForm && <AddNewPlant onAddPlant={handleAddPlant} />}
       {children}
-    </>
+    </div>
   </section>
   );
 };
