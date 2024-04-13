@@ -5,6 +5,7 @@ import Dashboard from '../Dashboard';
 const URL = import.meta.env.VITE_BASE_URL;
 const CareLogs = ( { handleLogout } ) => {
     const [careLogs, setCareLogs] = useState([]);
+    const [isTableMode, setIsTableMode] = useState(true);
     const { user } = useOutletContext(); // access logged in user details such as id and username
     const { plantId } = useParams();
     console.log(plantId);
@@ -23,6 +24,9 @@ const CareLogs = ( { handleLogout } ) => {
         fetchCareLogs();
     }, [user.id, plantId]);
     
+    const toggleViewMode = () => {
+        setIsTableMode(prevMode => !prevMode);
+    };
 /*
 INSERT INTO careLogs (plantId, careDate, plantName, description, imageUrl, soilIsMoist, needsWaterToday, pottedPlant, needsRepotting, rootsHealthy, wateringFrequencyPerWeek, sunlightHoursPerDay)
 VALUES
@@ -41,27 +45,63 @@ VALUES
                 <button><Link to={`/dashboard`}>Back to Dashboard</Link></button>
                 <button><Link to={`/plant/${plantId}`}>Back to Plant Details</Link></button>
             </Dashboard>
-            <ul>
-                {careLogs.map(careLog =>(
-                    <li key={careLog.id}>
-                        <div>
-                            {/* <img src={careLog.imageurl} alt={careLog.plantname} /> */}
-                            {careLog.imageurl ? (
-                            <img className="care-logs-img" src={careLog.imageurl} alt={careLog.plantname} />
-                            ) : (
-                            <div>No image available</div>
-                            )}
-                            <br/>
-                            <strong>Care Date for {careLog.plantname}: </strong>{careLog.caredate}
-                        </div>
-                        <button>
-                            <Link to={`/plant/${plantId}/carelogs/${careLog.id}`}>
-                                View More Details
-                            </Link>
-                        </button>
-                    </li>
+
+            <div>
+            <button onClick={toggleViewMode}>
+              {!isTableMode ? 'Switch to List View' : 'Switch to Table View'}
+            </button>
+            {!isTableMode ? (
+            <table>
+                <thead>
+                    <tr>
+                        <th>Care Date</th>
+                        <th>Plant Name</th>
+                        <th>Navigate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {careLogs.map((careLog) => (
+                        <tr key={careLog.id}>
+                            <td>
+                            {careLog.caredate}
+                            </td>
+                            <td>
+                            {careLog.plantname}
+                            </td>
+                            <td>
+                                <button>
+                                    <Link to={`/plant/${plantId}/carelogs/${careLog.id}`}>
+                                        View More Details
+                                    </Link>
+                                </button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+            ) : (
+              <ul>
+                {careLogs.map(careLog => (
+                  <li key={careLog.id}>
+                    <div>
+                      {careLog.imageurl ? (
+                        <img className="care-logs-img" src={careLog.imageurl} alt={careLog.plantname} />
+                      ) : (
+                        <div>No image available</div>
+                      )}
+                      <br />
+                      <strong>Care Date for {careLog.plantname}: </strong>{careLog.caredate}
+                    </div>
+                    <button>
+                      <Link to={`/plant/${plantId}/carelogs/${careLog.id}`}>
+                        View More Details
+                      </Link>
+                    </button>
+                  </li>
                 ))}
-            </ul>
+              </ul>
+            )}
+          </div>
         </section>
     );
 };
