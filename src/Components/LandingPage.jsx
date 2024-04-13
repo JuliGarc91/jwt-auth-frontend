@@ -10,22 +10,20 @@ function LandingPage() {
   };
 
   return (
+  <>
     <section className="landing">
       <h2>Welcome to GardenNook</h2>
-      
       <button onClick={togglePlants}>
         {showPlants ? "Hide Plant Library" : "Show Plant Library"}
       </button>
       <button>
       <Link to="/dashboard">View Your Dashboard</Link>
       </button>
-
-      {showPlants && <SearchBar/>}
-      
-      {/* <h1>This is Your Landing Page</h1> */}
-      {/* Dashboard is a protected component. If you are not logged in and you try 
-        to navigate to the component you will be sent to the Login Page. Try It!*/}
     </section>
+    <section>
+      {showPlants && <SearchBar/>}
+    </section>
+  </>
   );
 }
 

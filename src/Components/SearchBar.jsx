@@ -36,7 +36,7 @@ const SearchBar = () => {
 
     return (
         <div className='search-bar'>
-            <h1>Search Results</h1>
+            <h1>Search Plants</h1>
             <input
                 type="text"
                 placeholder="Search..."
@@ -46,7 +46,7 @@ const SearchBar = () => {
             {isLoading ? (
                 <p>Loading...</p>
               ) : (
-            <section className='api-plants'>
+            <div className='api-plants'>
               <ul className='species-list api-plants'>
                 {filteredSpecies.map(species => (
                 <li key={species.id} className='species-list'>
@@ -68,7 +68,7 @@ const SearchBar = () => {
                 </li>
             ))}
              </ul>
-            </section>
+            </div>
             )}
         </div>
     );

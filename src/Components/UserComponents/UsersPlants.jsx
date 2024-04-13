@@ -37,10 +37,10 @@ const UsersPlants = () => {
   };
 
   return (
-    <section>
+    <section className='user-plants-dashboard-container'>
       {/* <h2>{user.username[0].toUpperCase()}
           {user.username.slice(1).toLowerCase()}'s Plants:</h2> */}
-      <ul className='user-plants-dashboard'>
+      <ul className='user-plants-dashboard-ul'>
         {userPlants.map(plant => (
           <li key={plant.id}>
             <div className='img-container'>

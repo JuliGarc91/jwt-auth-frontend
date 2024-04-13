@@ -34,8 +34,7 @@ VALUES
 
 // add function to reverse order of logs by date
     return (
-        <section>
-            <p>add chart here to see everyday progress</p>
+        <section className='carelogs-section'>
             <Dashboard handleLogout={handleLogout}>
                 {/* add link to care log form once component is created */}
                 <button>Add Care Log</button>

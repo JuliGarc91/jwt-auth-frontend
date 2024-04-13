@@ -35,7 +35,6 @@ const isDashboardPage = location.pathname === '/dashboard';
         toggleLogin={toggleLogin}
         setToggleLogin={setToggleLogin}
       />
-      <main className={isDashboardPage ? 'dashboard-container' : ''}>
       {/* <h2>Welcome to GardenNook</h2> */}
       <Routes>
         <Route path="/" element={<LandingPage />} />
@@ -71,7 +70,6 @@ const isDashboardPage = location.pathname === '/dashboard';
           />
         </Route>
       </Routes>
-      </main>
     </>
   );
 }

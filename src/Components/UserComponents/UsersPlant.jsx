@@ -41,7 +41,8 @@ const UsersPlant = ({ handleLogout }) => {
   }
 
   return (
-  <section className="plant-details-main">
+  <>
+  <section>
     <Dashboard handleLogout={handleLogout}>
             <button>
               <Link to={`/dashboard`}>
@@ -49,23 +50,17 @@ const UsersPlant = ({ handleLogout }) => {
               </Link>
             </button>
     </Dashboard>
+    </section>
+
     <section className='user-plant-dashboard'>
-      <h2>Plant Details</h2>
-      <div className='img-container'>
-        <img src={plant.imageurl} alt={plant.name} />
-        </div>
-          <div>
-        
+        <img className="plant-details-img" src={plant.imageurl} alt={plant.name} />
+        <div>
           <p>
             <strong>Name:</strong> {plant.name}
           </p>
-        
-        
           <p>
             <strong>Species:</strong> {plant.species}
           </p>
-        
-        
           <p>
             <strong>Care Instructions:</strong> {plant.careinstructions}
           </p>
@@ -74,13 +69,11 @@ const UsersPlant = ({ handleLogout }) => {
           </button>
           <button onClick={toggleEditPlantForm}>
           {showEditPlantForm ? "Hide Form" : "Edit Plant"}
-        </button>
-        
-        
-        {showEditPlantForm && <EditPlant plant={plant} />}
-      </div>
+          </button>
+          {showEditPlantForm && <EditPlant plant={plant} />}
+        </div>
     </section>
-  </section>
+    </>
   );  
 };
 

@@ -18,11 +18,11 @@ return (
   <section className="dashboard">
     <>
       {user && (
-        <h1>
+        <h2>
           Welcome to your Garden Nook, {user.username[0].toUpperCase()}
           {user.username.slice(1).toLowerCase()}!
           
-        </h1>
+        </h2>
       )}
       <button onClick={handleLogout}>Logout</button>
       <button onClick={toggleAddPlant}>
