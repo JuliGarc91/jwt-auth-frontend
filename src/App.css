@@ -117,6 +117,16 @@ img {
     padding: 1rem 1rem 1rem 1rem;
 }
 
+img.care-logs-img{
+    min-width: 15rem;
+    min-height: 15rem;
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+    border-radius: 10%;
+    padding: 1rem 1rem 1rem 1rem;
+}
+
 div.all-plants-details-dashboard, div.plant-details-dashboard {
     display: flex;
     flex-direction: column;

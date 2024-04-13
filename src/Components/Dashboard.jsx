@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useOutletContext } from "react-router-dom";
 import AddNewPlant from "./UserComponents/AddNewPlant";
 
-const Dashboard = ({ handleLogout }) => {
+const Dashboard = ({ handleLogout, children }) => {
   const { user } = useOutletContext(); // Access user data provided by the Outlet's context
   const [userPlants, setUserPlants] = useState([]);
   const [showAddPlantForm, setShowAddPlantForm] = useState(false);
@@ -29,6 +29,7 @@ return (
         {showAddPlantForm ? "Hide Form" : "Add Plant"}
       </button>
       {showAddPlantForm && <AddNewPlant onAddPlant={handleAddPlant} />}
+      {children}
     </>
   </section>
   );

@@ -42,14 +42,15 @@ const UsersPlant = ({ handleLogout }) => {
 
   return (
   <section className="plant-details-main">
-    <Dashboard handleLogout={handleLogout}/>
+    <Dashboard handleLogout={handleLogout}>
+            <button>
+              <Link to={`/dashboard`}>
+                Back to Dashboard
+              </Link>
+            </button>
+    </Dashboard>
     <section className='user-plant-dashboard'>
       <h2>Plant Details</h2>
-      {/* <p>Name: {plant.name}</p>
-      <p>Species: {plant.species}</p>
-      <p>Care Instructions: {plant.careinstructions}</p>
-      <img src={plant.imageurl} alt={plant.name} /> */}
-      {/* will contain plant log component, edit plant form component and delete plant component */}
       <div className='img-container'>
         <img src={plant.imageurl} alt={plant.name} />
         </div>

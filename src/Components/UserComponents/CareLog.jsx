@@ -10,7 +10,7 @@ const CareLog = () => {
   console.log(user);
   console.log(id);
   console.log(plantId);
-  
+
   // route is /:userId/userPlants/:plantId/carelogs/:id
   useEffect(() => {
     const fetchCareLog = async () => {
@@ -32,7 +32,7 @@ const CareLog = () => {
   }, [user.id, plantId, id])
 
   return (
-    <div>CareLog: Add Chart View Here</div>
+    <div>CareLog: Add A Chart View Here maybe, but also details. Edit and delete button go here</div>
   )
 }
 
