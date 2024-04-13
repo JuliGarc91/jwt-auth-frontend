@@ -46,8 +46,8 @@ const SearchBar = () => {
             {isLoading ? (
                 <p>Loading...</p>
               ) : (
-            <div className='api-plants'>
-              <ul className='species-list api-plants'>
+            <div>
+              <ul className='api-plants'>
                 {filteredSpecies.map(species => (
                 <li key={species.id} className='species-list'>
                   {!species.default_image || (species.watering.includes("Upgrade Plans To Premium/Supreme - https://perenual.com/subscription-api-pricing. I'm sorry") &&

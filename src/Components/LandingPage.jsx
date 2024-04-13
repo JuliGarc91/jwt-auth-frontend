@@ -20,7 +20,7 @@ function LandingPage() {
       <Link to="/dashboard">View Your Dashboard</Link>
       </button>
     </section>
-    <section>
+    <section className="api-plants">
       {showPlants && <SearchBar/>}
     </section>
   </>
