@@ -10,7 +10,7 @@ const CareLog = () => {
   console.log(user);
   console.log(id);
   console.log(plantId);
-
+// not sure if need yet
   // route is /:userId/userPlants/:plantId/carelogs/:id
   useEffect(() => {
     const fetchCareLog = async () => {

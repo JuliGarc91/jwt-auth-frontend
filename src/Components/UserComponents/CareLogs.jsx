@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useOutletContext, useParams } from "react-router-dom";
+import { Link, useOutletContext, useParams, useNavigate } from "react-router-dom";
 import Dashboard from '../Dashboard';
 
 const URL = import.meta.env.VITE_BASE_URL;
@@ -8,6 +8,7 @@ const CareLogs = ( { handleLogout } ) => {
     const [isTableMode, setIsTableMode] = useState(true);
     const { user } = useOutletContext(); // access logged in user details such as id and username
     const { plantId } = useParams();
+    const navigate = useNavigate();
     console.log(plantId);
     console.log(user);
     useEffect(() => {
@@ -27,6 +28,29 @@ const CareLogs = ( { handleLogout } ) => {
     const toggleViewMode = () => {
         setIsTableMode(prevMode => !prevMode);
     };
+
+    
+    const handleDelete = (id) => {
+      fetch(`${URL}/api/users/${user.id}/userPlants/${plantId}/carelogs/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      .then((res) => {
+        if (res.ok) {
+          setCareLogs(careLogs.filter((careLog) => careLog.id !== id));
+        } else {
+          console.log ('Error deleting care log');
+        }
+      })
+      .then(()=>{
+        navigate("/dashboard");
+      })
+      .catch((error) => {
+        console.error("Error occurred while deleting care log:", error);
+      })
+    }
 
 // add function to reverse order of logs by date
     return (
@@ -57,6 +81,7 @@ const CareLogs = ( { handleLogout } ) => {
                         <th>Roots healthy?</th>
                         <th>Watering Frequency (weekly)</th>
                         <th>Sunlight Hours (Daily)</th>
+                        <th>Delete Care Log</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -95,6 +120,9 @@ const CareLogs = ( { handleLogout } ) => {
                             </td>
                             <td>
                               {careLog.sunlighthoursperday}
+                            </td>
+                            <td>
+                              <button onClick={() => handleDelete(careLog.id)}>Delete</button>
                             </td>
                         </tr>
                     ))}
