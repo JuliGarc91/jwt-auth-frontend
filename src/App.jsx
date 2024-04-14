@@ -11,6 +11,7 @@ import UsersPlant from "./Components/UserComponents/UsersPlant";
 import CareLogs from "./Components/UserComponents/CareLogs";
 import "./App.css";
 import CareLog from "./Components/UserComponents/CareLog";
+import Footer from "./Components/UserComponents/Footer";
 
 
 function App() {
@@ -67,6 +68,7 @@ function App() {
           />
         </Route>
       </Routes>
+      <Footer/>
     </>
   );
 }

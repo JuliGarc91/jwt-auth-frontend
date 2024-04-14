@@ -50,7 +50,7 @@ const UsersPlants = () => {
             <div>
               <strong>Name:</strong> {plant.name}
             </div>
-            <button onClick={() => handleDeletePlant(user.id, plant.id)}>
+            <button onClick={() => handleDeletePlant(user.id, plant.id)} className='delete-button'>
               Delete
             </button>
             <button>
