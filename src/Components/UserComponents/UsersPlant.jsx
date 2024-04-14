@@ -40,6 +40,21 @@ const UsersPlant = ({ handleLogout }) => {
     return <div>Loading...</div>;
   }
 
+/*
+  CREATE TABLE plants (
+    id SERIAL PRIMARY KEY,
+    userId INTEGER NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    species VARCHAR(255),
+    color VARCHAR(255),
+    plantType VARCHAR(255),
+    isFloweringPlant BOOLEAN,
+    soilType VARCHAR(255),
+    careInstructions TEXT,
+    imageUrl TEXT,
+    FOREIGN KEY (userId) REFERENCES users(id)
+  );
+*/
   return (
   <>
   <section>
@@ -64,6 +79,18 @@ const UsersPlant = ({ handleLogout }) => {
           </p>
           <p>
             <strong>Species:</strong> {plant.species}
+          </p>
+          <p>
+            <strong>Color:</strong> {plant.color}
+          </p> 
+          <p>
+            <strong>Plant Type:</strong> {plant.planttype}
+          </p>
+          <p>
+            <strong>Is it a flowering Plant?</strong> {plant.isfloweringplant ? "Yes" : "No"}
+          </p>
+          <p>
+            <strong>Soil Type Used: </strong> {plant.soiltype}
           </p>
           <p>
             <strong>Care Instructions:</strong> {plant.careinstructions}

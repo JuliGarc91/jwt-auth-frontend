@@ -10,8 +10,12 @@ const EditPlant = ({ plant }) => {
     const [plantData, setPlantData] = useState({
         userid: user.id,
         username: user.username,
-        name: plant ? plant.name : "",
+        name: plant.name, // this is going to be required input so no ternary in case of null / undefined
         species: plant ? plant.species : "",
+        color: plant ? plant.color : "",
+        planttype: plant ? plant.planttype : "",
+        isfloweringplant: plant ? plant.isfloweringplant : "",
+        soiltype: plant ? plant.soiltype : "",
         careinstructions: plant ? plant.careinstructions : "",
         imageurl: plant ? plant.imageurl : ""
     });
@@ -46,6 +50,22 @@ const EditPlant = ({ plant }) => {
         });
     };
 
+    /*
+  CREATE TABLE plants (
+    id SERIAL PRIMARY KEY,
+    userId INTEGER NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    species VARCHAR(255),
+    color VARCHAR(255),
+    plantType VARCHAR(255),
+    isFloweringPlant BOOLEAN,
+    soilType VARCHAR(255),
+    careInstructions TEXT,
+    imageUrl TEXT,
+    FOREIGN KEY (userId) REFERENCES users(id)
+  );
+*/
+
     return (
         <div className="edit-plant-form">
         <h3>Edit Plant</h3>
@@ -66,6 +86,44 @@ const EditPlant = ({ plant }) => {
                 id="species"
                 name="species"
                 value={plantData.species}
+                onChange={handleInputChange}
+            />
+            </label>
+            <label htmlFor="color">Color: 
+            <input
+                type="text"
+                id="color"
+                name="color"
+                value={plantData.color}
+                onChange={handleInputChange}
+            />
+            </label>
+            <label htmlFor="planttype">Plant Type: 
+            <input
+                type="text"
+                id="planttype"
+                name="planttype"
+                value={plantData.planttype}
+                onChange={handleInputChange}
+            />
+            </label>
+            <label htmlFor="isfloweringplant"> Is it a Flowering Plant?
+                <select
+                    id="isfloweringplant"
+                    name="isfloweringplant"
+                    value={plantData.isfloweringplant}
+                    onChange={handleInputChange}
+                >
+                    <option value={true}>Yes</option>
+                    <option value={false}>No</option>
+                </select>
+            </label>
+            <label htmlFor="soiltype">Soil Type Used: 
+            <input
+                type="text"
+                id="soiltype"
+                name="soiltype"
+                value={plantData.soiltype}
                 onChange={handleInputChange}
             />
             </label>

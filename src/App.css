@@ -218,7 +218,7 @@ div.edit-plant-form label, div.add-new-plant-form label {
     align-items: center;
 }
 
-div.edit-plant-form label input, div.edit-plant-form label textarea, div.add-new-plant-form label input, div.add-new-plant-form label textarea {
+div.edit-plant-form label input, div.edit-plant-form label select, div.edit-plant-form label textarea, div.add-new-plant-form label input, div.add-new-plant-form label select, div.add-new-plant-form label textarea {
     font-size: 1.5rem;
     margin-bottom: 1rem;
     width: 40vw;
