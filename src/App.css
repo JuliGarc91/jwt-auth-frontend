@@ -25,7 +25,7 @@ h3 {
 a, li, p, h2, h3, span {
     text-decoration: none;
     list-style: none;
-    color:rgb(254, 177, 186)
+    color:rgb(254, 177, 186);
 }
 
 div.nav-links {
@@ -149,19 +149,6 @@ div.search-bar {
     background-color: rgba(0, 0, 0, 0.358);
 }
 
-table {
-    font-size: 1.5rem;
-    padding: 1rem;
-    gap: 0.5rem;
-    color:rgb(251, 220, 180);
-    background-color: rgba(0, 0, 0, 0.358);
-    border-radius: 0.5rem;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    width: 50vw;
-    flex-direction: column;
-}
 
 div.edit-plant-form, div.add-new-plant-form {
     padding: 1rem;
@@ -220,6 +207,35 @@ div.login-form, div.registration-form{
     flex-direction: column;
 }
 
+/* table {
+    font-size: 1.5rem;
+    padding: 1rem;
+    gap: 0.5rem;
+    color:rgb(251, 220, 180);
+    background-color: rgba(0, 0, 0, 0.358);
+    border-radius: 0.5rem;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+} */
+
+table {
+    background-color: rgba(0, 0, 0, 0.358);
+    color:rgb(251, 220, 180);
+}
+
+th {
+    /* font-size: 1rem; */
+    color: rgb(254, 177, 186);
+}
+
+td {
+    font-size: 1rem;
+}
+
 th, td {
     padding: 0.5rem;
+    background-color: rgba(0, 0, 0, 0.358);
 }

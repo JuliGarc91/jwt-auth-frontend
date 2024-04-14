@@ -56,6 +56,15 @@ VALUES
                     <tr>
                         <th>Care Date</th>
                         <th>Plant Name</th>
+                        <th>Height (inches)</th>
+                        <th>Potted Plant</th>
+                        <th>Is Propagated?</th>
+                        <th>Soil is Moist?</th>
+                        <th>Needs Water Today?</th>
+                        <th>Needs Repotting?</th>
+                        <th>Roots healthy?</th>
+                        <th>Watering Frequency (weekly)</th>
+                        <th>Sunlight Hours (Daily)</th>
                         <th>Navigate</th>
                     </tr>
                 </thead>
@@ -63,10 +72,37 @@ VALUES
                     {careLogs.map((careLog) => (
                         <tr key={careLog.id}>
                             <td>
-                            {careLog.caredate}
+                              {careLog.caredate}
                             </td>
                             <td>
-                            {careLog.plantname}
+                              {careLog.plantname}
+                            </td>
+                            <td>
+                              {careLog.heightininches}
+                            </td>
+                            <td>
+                              {careLog.pottedplant ? "Yes" : "No"}
+                            </td>
+                            <td>
+                              {careLog.ispropagation ? "Yes" : "No"}
+                            </td>
+                            <td>
+                              {careLog.soilismoist ? "Yes" : "No"}
+                            </td>
+                            <td>
+                              {careLog.needswatertoday ? "Yes" : "No"}
+                            </td>
+                            <td>
+                              {careLog.needsrepotting ? "Yes" : "No"}
+                            </td>
+                            <td>
+                              {careLog.rootshealthy ? "Yes" : "No"}
+                            </td>
+                            <td>
+                              {careLog.wateringfrequencyperweek}
+                            </td>
+                            <td>
+                              {careLog.sunlighthoursperday}
                             </td>
                             <td>
                                 <button>
