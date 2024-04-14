@@ -23,17 +23,11 @@ return (
           {user.username.slice(1).toLowerCase()}!
         </h2>
       )}
-      <div>
       <button onClick={handleLogout}>Logout</button>
-      </div>
-      <div>
       <button onClick={toggleAddPlant}>
         {showAddPlantForm ? "Hide Form" : "Add Plant"}
       </button>
-      </div>
-      <div>
       {showAddPlantForm && <AddNewPlant onAddPlant={handleAddPlant} />}
-      </div>
       {children}
     </div>
   </section>

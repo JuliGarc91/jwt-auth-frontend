@@ -42,7 +42,7 @@ const UsersPlants = () => {
           {user.username.slice(1).toLowerCase()}'s Plants:</h2> */}
       <ul className='user-plants-dashboard-ul'>
         {userPlants.map(plant => (
-          <li key={plant.id}>
+          <li key={plant.id} className='user-plants-li'>
             <div className='img-container'>
               <img src={plant.imageurl} alt={plant.name} />
             </div>

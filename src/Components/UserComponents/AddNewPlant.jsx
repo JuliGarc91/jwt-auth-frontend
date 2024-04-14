@@ -58,40 +58,44 @@ return (
     <div className="add-new-plant-form">
         <h3>Add Plant to Dashboard</h3>
         <form onSubmit={handleSubmit}>
-            <label htmlFor="name">Plant Name:
+            <label htmlFor="name">
             <input
                 type="text"
                 id="name"
                 name="name"
                 value={plantData.name}
                 onChange={handleInputChange}
+                placeholder="Plant Name"
                 required
             />
             </label>
-            <label htmlFor="species">Species:
+            <label htmlFor="species">
             <input
                 type="text"
                 id="species"
                 name="species"
                 value={plantData.species}
                 onChange={handleInputChange}
+                placeholder="Species"
             />
             </label>
-            <label htmlFor="careinstructions">Care Instructions:
+            <label htmlFor="careinstructions">
             <textarea
                 id="careinstructions"
                 name="careinstructions"
                 value={plantData.careinstructions}
                 onChange={handleInputChange}
+                placeholder="Care Instructions"
             />
             </label>
-            <label htmlFor="imageurl">Plant Picture URL:
+            <label htmlFor="imageurl">
             <input
                 type="text"
                 id="imageurl"
                 name="imageurl"
                 value={plantData.imageurl}
                 onChange={handleInputChange}
+                placeholder="Plant Picture URL"
             />
             </label>
             <button type="submit">Submit</button>

@@ -44,27 +44,21 @@ const UsersPlant = ({ handleLogout }) => {
   <>
   <section>
     <Dashboard handleLogout={handleLogout}>
-            <div>
             <button onClick={toggleEditPlantForm}>
               {showEditPlantForm ? "Hide Form" : "Edit Plant"}
             </button>
-            </div>
-            <div>
               {showEditPlantForm && <EditPlant plant={plant} />}
-            </div>
-            <div>
             <button>
               <Link to={`/dashboard`}>
                 Back to Dashboard
               </Link>
             </button>
-            </div>
     </Dashboard>
     </section>
 
     <section className='user-plant-dashboard'>
         <img className="plant-details-img" src={plant.imageurl} alt={plant.name} />
-        <div>
+        <div className="plant-details">
           <p>
             <strong>Name:</strong> {plant.name}
           </p>

@@ -27,14 +27,6 @@ const CareLogs = ( { handleLogout } ) => {
     const toggleViewMode = () => {
         setIsTableMode(prevMode => !prevMode);
     };
-/*
-INSERT INTO careLogs (plantId, careDate, plantName, description, imageUrl, soilIsMoist, needsWaterToday, pottedPlant, needsRepotting, rootsHealthy, wateringFrequencyPerWeek, sunlightHoursPerDay)
-VALUES
-(1, '2024-04-12', 'Spider Plant', 'Watered the spider plant.', NULL, TRUE, FALSE, TRUE, FALSE, TRUE, 2, 6),
-(1, '2024-04-13', 'Spider Plant', 'Propagated the spider plant.', 'https://example.com/watering_image.jpg', TRUE, FALSE, TRUE, FALSE, TRUE, 2, 6),
-(2, '2024-04-12', 'Snake Plant', 'Trimmed dead leaves from the snake plant.', 'https://example.com/trimming_image.jpg', TRUE, TRUE, TRUE, FALSE, TRUE, 1, 4),
-(3, '2024-04-12', 'Peace Lily' ,'Applied fertilizer to the peace lily.', 'https://example.com/fertilizing_image.jpg', TRUE, FALSE, TRUE, TRUE, TRUE, 2, 3);
-*/
 
 // add function to reverse order of logs by date
     return (
@@ -65,7 +57,6 @@ VALUES
                         <th>Roots healthy?</th>
                         <th>Watering Frequency (weekly)</th>
                         <th>Sunlight Hours (Daily)</th>
-                        <th>Navigate</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -87,7 +78,8 @@ VALUES
                               {careLog.ispropagation ? "Yes" : "No"}
                             </td>
                             <td>
-                              {careLog.soilismoist ? "Yes" : "No"}
+                              {/* {careLog.soilismoist ? "Yes" : "No"} */}
+                              {careLog.pottedplant ? (careLog.soilismoist ? "Yes" : "No") : 'N/A'}
                             </td>
                             <td>
                               {careLog.needswatertoday ? "Yes" : "No"}
@@ -104,13 +96,6 @@ VALUES
                             <td>
                               {careLog.sunlighthoursperday}
                             </td>
-                            <td>
-                                <button>
-                                    <Link to={`/plant/${plantId}/carelogs/${careLog.id}`}>
-                                        View More Details
-                                    </Link>
-                                </button>
-                            </td>
                         </tr>
                     ))}
                 </tbody>
@@ -118,7 +103,7 @@ VALUES
             ) : (
               <ul>
                 {careLogs.map(careLog => (
-                  <li key={careLog.id}>
+                  <li key={careLog.id} className='carelogs-li'>
                     <div>
                       {careLog.imageurl ? (
                         <img className="care-logs-img" src={careLog.imageurl} alt={careLog.plantname} />
@@ -128,11 +113,19 @@ VALUES
                       <br />
                       <strong>Care Date for {careLog.plantname}: </strong>{careLog.caredate}
                     </div>
+                    {/* button will toggle more details maybe */}
                     <button>
                       <Link to={`/plant/${plantId}/carelogs/${careLog.id}`}>
                         View More Details
                       </Link>
                     </button>
+                    <p><em>Height:</em> {careLog.heightininches} inch(es)</p>
+                    <p><em>Is Currently in Pot?</em> {careLog.pottedplant ? "Yes" : "No"}</p>
+                    <p><em>If in a pot is soil moist?</em> {careLog.pottedplant ? (careLog.soilismoist ? "Yes" : "No") : 'N/A'}</p>
+                    <p><em>Plant is Propagation?</em> {careLog.ispropagation ? "Yes" : "No"}</p>
+                    <p><em>Needs watering?</em> {careLog.needswatertoday ? "Yes" : "No"}</p>
+                    <p><em>Needs to be Re-Potted?</em> {careLog.needsrepotting ? "Yes" : "No"}</p>
+                    <p><em>Are The Roots Healthy?</em> {careLog.rootshealthy ? "Yes" : "No"}</p>
                   </li>
                 ))}
               </ul>
