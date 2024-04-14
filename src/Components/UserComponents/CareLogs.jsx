@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useOutletContext, useParams, useNavigate } from "react-router-dom";
 import Dashboard from '../Dashboard';
+// import { Line } from 'react-chartjs-2';
 
 const URL = import.meta.env.VITE_BASE_URL;
 const CareLogs = ( { handleLogout } ) => {
@@ -67,6 +68,7 @@ const CareLogs = ( { handleLogout } ) => {
               {!isTableMode ? 'Switch to List View' : 'Switch to Table View'}
             </button>
             {!isTableMode ? (
+              <>
             <table>
                 <thead>
                     <tr>
@@ -128,6 +130,7 @@ const CareLogs = ( { handleLogout } ) => {
                     ))}
                 </tbody>
             </table>
+            </>
             ) : (
               <ul>
                 {careLogs.map(careLog => (
@@ -142,11 +145,11 @@ const CareLogs = ( { handleLogout } ) => {
                       <strong>Care Date for {careLog.plantname}: </strong>{careLog.caredate}
                     </div>
                     {/* button will toggle more details maybe */}
-                    <button>
+                    {/* <button>
                       <Link to={`/plant/${plantId}/carelogs/${careLog.id}`}>
                         View More Details
                       </Link>
-                    </button>
+                    </button> */}
                     <p><em>Height:</em> {careLog.heightininches} inch(es)</p>
                     <p><em>Is Currently in Pot?</em> {careLog.pottedplant ? "Yes" : "No"}</p>
                     <p><em>If in a pot is soil moist?</em> {careLog.pottedplant ? (careLog.soilismoist ? "Yes" : "No") : 'N/A'}</p>
@@ -154,6 +157,7 @@ const CareLogs = ( { handleLogout } ) => {
                     <p><em>Needs watering?</em> {careLog.needswatertoday ? "Yes" : "No"}</p>
                     <p><em>Needs to be Re-Potted?</em> {careLog.needsrepotting ? "Yes" : "No"}</p>
                     <p><em>Are The Roots Healthy?</em> {careLog.rootshealthy ? "Yes" : "No"}</p>
+                    <button onClick={() => handleDelete(careLog.id)}>Delete Care Log</button>
                   </li>
                 ))}
               </ul>
