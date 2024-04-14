@@ -44,7 +44,7 @@ const NavBar = ({ toggleLogin, handleLogout }) => {
         </Link>
       ) : (
         <>
-          {user && <span>Hello, {user.username.toUpperCase()}&nbsp;&nbsp;&nbsp;</span>}
+          {user && <span className="welcome">Hello, {user.username.toUpperCase()}&nbsp;&nbsp;&nbsp;</span>}
           <Link onClick={handleLogout}className="logout-link">
             <span>Logout&nbsp;</span>
           </Link></>

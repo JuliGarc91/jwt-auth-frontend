@@ -36,17 +36,21 @@ return (
           {user.username.slice(1).toLowerCase()}!
         </h2>
       )}
-      <button onClick={handleLogout} className="logout-button">Logout</button>
+      
+      <button onClick={handleLogout} className="logout-button">
+        Logout
+      </button>
 
       <button onClick={handleClick}>
-      {!isBackgroundImage? "Dark Mode":"light mode"}
+        {!isBackgroundImage? "Dark Mode":"light mode"}
       </button>
 
       <button onClick={toggleAddPlant}>
         {showAddPlantForm ? "Hide Form" : "Add Plant"}
       </button>
-      {showAddPlantForm && <AddNewPlant onAddPlant={handleAddPlant} />}
-      {children}
+        {showAddPlantForm && <AddNewPlant onAddPlant={handleAddPlant} />}
+        {children}
+
     </div>
   </section>
   );

@@ -34,7 +34,8 @@ const SearchBar = () => {
     return (
         <div className='search-bar'>
             <h1>Search Plants</h1>
-            <input
+            <input 
+                className='search-bar'
                 type="text"
                 placeholder="Search..."
                 value={searchQuery}
