@@ -44,11 +44,21 @@ const UsersPlant = ({ handleLogout }) => {
   <>
   <section>
     <Dashboard handleLogout={handleLogout}>
+            <div>
+            <button onClick={toggleEditPlantForm}>
+              {showEditPlantForm ? "Hide Form" : "Edit Plant"}
+            </button>
+            </div>
+            <div>
+              {showEditPlantForm && <EditPlant plant={plant} />}
+            </div>
+            <div>
             <button>
               <Link to={`/dashboard`}>
                 Back to Dashboard
               </Link>
             </button>
+            </div>
     </Dashboard>
     </section>
 
@@ -67,10 +77,10 @@ const UsersPlant = ({ handleLogout }) => {
           <button>
             <Link to={`/plant/${plant.id}/carelogs`}>Plant Care Logs</Link>
           </button>
-          <button onClick={toggleEditPlantForm}>
+          {/* <button onClick={toggleEditPlantForm}>
           {showEditPlantForm ? "Hide Form" : "Edit Plant"}
           </button>
-          {showEditPlantForm && <EditPlant plant={plant} />}
+          {showEditPlantForm && <EditPlant plant={plant} />} */}
         </div>
     </section>
     </>

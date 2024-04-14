@@ -55,10 +55,10 @@ const AddNewPlant = ({onAddPlant}) => {
     };
 
 return (
-    <>
-        <h3>Add Plant</h3>
+    <div className="add-new-plant-form">
+        <h3>Add Plant to Dashboard</h3>
         <form onSubmit={handleSubmit}>
-            <label htmlFor="name">Plant Name:</label>
+            <label htmlFor="name">Plant Name:
             <input
                 type="text"
                 id="name"
@@ -67,7 +67,8 @@ return (
                 onChange={handleInputChange}
                 required
             />
-            <label htmlFor="species">Species:</label>
+            </label>
+            <label htmlFor="species">Species:
             <input
                 type="text"
                 id="species"
@@ -75,14 +76,16 @@ return (
                 value={plantData.species}
                 onChange={handleInputChange}
             />
-            <label htmlFor="careinstructions">Care Instructions:</label>
+            </label>
+            <label htmlFor="careinstructions">Care Instructions:
             <textarea
                 id="careinstructions"
                 name="careinstructions"
                 value={plantData.careinstructions}
                 onChange={handleInputChange}
             />
-            <label htmlFor="imageurl">Plant Picture URL:</label>
+            </label>
+            <label htmlFor="imageurl">Plant Picture URL:
             <input
                 type="text"
                 id="imageurl"
@@ -90,10 +93,10 @@ return (
                 value={plantData.imageurl}
                 onChange={handleInputChange}
             />
-        
-            <button type="submit">Add Plant</button>
+            </label>
+            <button type="submit">Submit</button>
         </form>
-    </>
+    </div>
     );
 };
 

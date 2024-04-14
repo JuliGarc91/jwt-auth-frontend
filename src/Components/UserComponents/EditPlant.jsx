@@ -47,10 +47,10 @@ const EditPlant = ({ plant }) => {
     };
 
     return (
-        <>
+        <div className="edit-plant-form">
         <h3>Edit Plant</h3>
         <form onSubmit={handleSubmit}>
-            <label htmlFor="name">Plant Name:</label>
+            <label htmlFor="name">Plant Name: 
             <input
                 type="text"
                 id="name"
@@ -59,7 +59,8 @@ const EditPlant = ({ plant }) => {
                 onChange={handleInputChange}
                 required
             />
-            <label htmlFor="species">Species:</label>
+            </label>
+            <label htmlFor="species">Species: 
             <input
                 type="text"
                 id="species"
@@ -67,14 +68,16 @@ const EditPlant = ({ plant }) => {
                 value={plantData.species}
                 onChange={handleInputChange}
             />
-            <label htmlFor="careinstructions">Care Instructions:</label>
+            </label>
+            <label htmlFor="careinstructions">Care Instructions: 
             <textarea
                 id="careinstructions"
                 name="careinstructions"
                 value={plantData.careinstructions}
                 onChange={handleInputChange}
             />
-            <label htmlFor="imageurl">Plant Picture URL:</label>
+            </label>
+            <label htmlFor="imageurl">Plant Picture URL:  
             <input
                 type="text"
                 id="imageurl"
@@ -82,9 +85,10 @@ const EditPlant = ({ plant }) => {
                 value={plantData.imageurl}
                 onChange={handleInputChange}
             />
-            <button type="submit">Edit Plant Details</button>
+            </label>
+            <button type="submit">Submit</button>
         </form>
-        </>
+        </div>
     );
 };
 

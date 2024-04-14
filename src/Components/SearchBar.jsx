@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+// import { Link } from 'react-router-dom';
 
 const PLANT_API = import.meta.env.VITE_API_BASE_URL;
 const SearchBar = () => {

@@ -62,12 +62,10 @@ const Login = ({ setToggleLogin }) => {
   }
 
   return (
-    <div style={{ textAlign: "center" }}>
-        {/* Use the DemoUser button to login and save time during your presentation */}
-    
+    <div className="login-form">
       <button onClick={handleDemoSignIn}>Demo User</button>
-    {/* Below is the regular login form which should be functional */}
       <form onSubmit={handleSubmit}>
+        <div>
         <label htmlFor="username">
           <input
             id="username"
@@ -78,7 +76,8 @@ const Login = ({ setToggleLogin }) => {
             onChange={handleChange}
           />
         </label>
-
+        </div>
+        <div>
         <label htmlFor="password">
           <input
             id="password"
@@ -89,6 +88,7 @@ const Login = ({ setToggleLogin }) => {
             autoComplete="current-password"
           />
         </label>
+        </div>
         <button>Submit</button>
       </form>
       <p>

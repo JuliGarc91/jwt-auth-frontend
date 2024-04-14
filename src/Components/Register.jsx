@@ -45,12 +45,11 @@ const Register = ({ setToggleLogin }) => {
   // USE THIS FORM TO BUILD OUT YOUR FORM PROPERLY BY ADDING LABELS AND INPUTS AS WELL AS WHATEVER CSS FRAMEWORK YOU MAY USE OR VANILLA CSS. THIS IS JUST A BOILERPLATE CODE
 
   return (
-    <div style={{ textAlign: "center" }}>
-      <p>
-        Already have an account? <Link to="/login">Login</Link>
-      </p>
+    <div className="registration-form">
+      
       <h3>Register</h3>
       <form onSubmit={handleSubmit}>
+        <div>
         <label htmlFor="username">
           <input
             id="username"
@@ -61,7 +60,8 @@ const Register = ({ setToggleLogin }) => {
             autoComplete="username"
           />
         </label>
-
+        </div>
+        <div>
         <label htmlFor="email">
           <input
             id="email"
@@ -72,7 +72,8 @@ const Register = ({ setToggleLogin }) => {
             autoComplete="email"
           />
         </label>
-
+        </div>
+        <div>
         <label htmlFor="password">
           <input
             id="password"
@@ -83,9 +84,12 @@ const Register = ({ setToggleLogin }) => {
             autoComplete="current-password"
           />
         </label>
-
+        </div>
         <button>Submit</button>
-      </form>
+        </form>
+        <p>
+        Already have an account? <Link to="/login">Login</Link>
+        </p>
     </div>
   );
 };
