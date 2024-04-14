@@ -45,7 +45,7 @@ const CareLogs = ( { handleLogout } ) => {
         }
       })
       .then(()=>{
-        navigate("/dashboard");
+        navigate(`/plant/${plantId}/carelogs`);
       })
       .catch((error) => {
         console.error("Error occurred while deleting care log:", error);
