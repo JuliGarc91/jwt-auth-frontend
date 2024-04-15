@@ -95,14 +95,14 @@ const CareLogs = ( { handleLogout } ) => {
           {
               label: 'Soil Moist',
               data: soilMoistData,
-              backgroundColor: 'rgba(251, 220, 180, 0.6)',
+              backgroundColor: 'rgba(251, 220, 180, 0.8)',
               borderColor: 'rgba(251, 220, 180, 1)',
               borderWidth: 1
           },
           {
               label: 'Watering Frequency',
               data: wateringFrequencyData,
-              backgroundColor: 'rgba(75, 192, 192, 0.6)',
+              backgroundColor: 'rgba(75, 192, 192, 0.8)',
               borderColor: 'rgba(75, 192, 192, 1)',
               borderWidth: 1
           }
@@ -120,9 +120,7 @@ const CareLogs = ( { handleLogout } ) => {
                 <button><Link to={`/plant/${plantId}`}>Back to Plant Details</Link></button>
             </Dashboard>
             <div className='carelogs-section'>
-            <br/>
-              <canvas id="barChart" className="chart"></canvas>
-              <br/>
+            
             <button onClick={toggleViewMode}>
               {!isTableMode ? 'Switch to List View' : 'Switch to Table View'}
             </button>
@@ -222,7 +220,9 @@ const CareLogs = ( { handleLogout } ) => {
               </ul>
             )}
           </div>
-          
+          <canvas id="barChart" className="chart"></canvas>
+          <br/>
+          <br/>
         </section>
     );
 };

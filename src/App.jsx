@@ -36,10 +36,7 @@ function App() {
       />
       {/* <h2>Welcome to GardenNook</h2> */}
       <Routes>
-        <Route
-          path="*"
-          element={<NotFound />}
-        />
+        
         <Route path="/" element={<LandingPage />} />
         <Route
           path="/login"
@@ -51,6 +48,10 @@ function App() {
         />
         <Route element={<ProtectedRoute />}>
           {/* Place protected routes here */}
+          <Route
+          path="*"
+          element={<NotFound />}
+          />
           <Route
             path="/dashboard"
             element={

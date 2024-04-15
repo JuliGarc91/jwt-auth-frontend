@@ -320,14 +320,15 @@ button:hover, button:hover a {
     /* color:rgb(251, 220, 180); */
     background-color: rgba(180, 251, 182, 0.724);
     margin:auto;
-    width:80%;
+    width: 80vw;
     border-radius: 0.5rem;
     padding: 2rem;
+    margin-bottom: 3rem;
 }
 table {
     background-color: rgba(0, 0, 0, 0.358);
     color:rgb(251, 220, 180);
-    width: 80%;
+    width: 80vw;
     border-radius: 0.5rem;
     margin:auto;
 }
