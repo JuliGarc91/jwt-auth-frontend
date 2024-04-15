@@ -1,7 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useOutletContext, useParams, useNavigate } from "react-router-dom";
 import Dashboard from '../Dashboard';
-// import { Line } from 'react-chartjs-2';
+// import { Line } from 'react-chartjs-2'; // doesn't work for some reason
+import Chart from 'chart.js/auto';
+import 'chartjs-adapter-moment'; // needs this and need to install npm install chartjs-adapter-moment because gotta use a time scale (date) chart.js uses UTC
 
 const URL = import.meta.env.VITE_BASE_URL;
 const CareLogs = ( { handleLogout } ) => {
@@ -10,6 +12,8 @@ const CareLogs = ( { handleLogout } ) => {
     const { user } = useOutletContext(); // access logged in user details such as id and username
     const { plantId } = useParams();
     const navigate = useNavigate();
+    const chartRef = useRef(null); // gotta use useRef to store the Chart instance because of way react renders stuff / needs to update state
+
     console.log(plantId);
     console.log(user);
     useEffect(() => {
@@ -53,23 +57,78 @@ const CareLogs = ( { handleLogout } ) => {
       })
     }
 
+    // using useEffect to add chart
+    useEffect(() => {
+      if (careLogs.length > 0) {
+      const ctx = document.getElementById('barChart');
+      if (ctx) {
+          if (chartRef.current) {
+              // If chart instance already exists, destroy it first because it'll give this error for example: "Uncaught Error: Canvas is already in use. Chart with ID '5' must be destroyed before the canvas with ID 'barChart' can be reused."
+              chartRef.current.destroy();
+          }
+          Chart.defaults.font.size = 18;
+          const config = {
+              type: 'bar',
+              data: prepareChartData(),
+              options: {
+                  scales: {
+                      y: {
+                          beginAtZero: true
+                      }
+                  }
+              },
+          };
+          chartRef.current = new Chart(ctx, config);
+        }
+      }
+    }, [careLogs]);
+
+    const prepareChartData = () => {
+      // const labels = careLogs.map(log => new Date(log.caredate).getTime());
+      const labels = careLogs.map(log => log.caredate);
+      const soilMoistData = careLogs.map(log => log.soilismoist ? 1 : 0);
+      const wateringFrequencyData = careLogs.map(log => log.wateringfrequencyperweek);
+// color:rgb(251, 220, 180);
+      return {
+        labels: labels,
+        datasets: [
+          {
+              label: 'Soil Moist',
+              data: soilMoistData,
+              backgroundColor: 'rgba(251, 220, 180, 0.6)',
+              borderColor: 'rgba(251, 220, 180, 1)',
+              borderWidth: 1
+          },
+          {
+              label: 'Watering Frequency',
+              data: wateringFrequencyData,
+              backgroundColor: 'rgba(75, 192, 192, 0.6)',
+              borderColor: 'rgba(75, 192, 192, 1)',
+              borderWidth: 1
+          }
+        ]
+      };
+    };
+
 // add function to reverse order of logs by date
     return (
-        <section className='carelogs-section'>
+        <section>
             <Dashboard handleLogout={handleLogout}>
                 {/* add link to care log form once component is created */}
                 <button>Add Care Log</button>
                 <button><Link to={`/dashboard`}>Back to Dashboard</Link></button>
                 <button><Link to={`/plant/${plantId}`}>Back to Plant Details</Link></button>
             </Dashboard>
-
-            <div>
+            <div className='carelogs-section'>
+            <br/>
+              <canvas id="barChart" className="chart"></canvas>
+              <br/>
             <button onClick={toggleViewMode}>
               {!isTableMode ? 'Switch to List View' : 'Switch to Table View'}
             </button>
             {!isTableMode ? (
-              <>
-            <table>
+            <>
+              <table>
                 <thead>
                     <tr>
                         <th>Care Date</th>
@@ -129,7 +188,7 @@ const CareLogs = ( { handleLogout } ) => {
                         </tr>
                     ))}
                 </tbody>
-            </table>
+              </table>
             </>
             ) : (
               <ul>
@@ -163,6 +222,7 @@ const CareLogs = ( { handleLogout } ) => {
               </ul>
             )}
           </div>
+          
         </section>
     );
 };
