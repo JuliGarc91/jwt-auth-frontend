@@ -79,6 +79,48 @@ return (
                 placeholder="Species"
             />
             </label>
+            <label htmlFor="color">Color: 
+            <input
+                type="text"
+                id="color"
+                name="color"
+                value={plantData.color}
+                onChange={handleInputChange}
+                placeholder="Color"
+            />
+            </label>
+            <label htmlFor="planttype">Plant Type: 
+            <input
+                type="text"
+                id="planttype"
+                name="planttype"
+                value={plantData.planttype}
+                onChange={handleInputChange}
+                placeholder="Plant Cycle Type"
+            />
+            </label>
+            <label htmlFor="isfloweringplant"> Is it a Flowering Plant?
+                <select
+                    id="isfloweringplant"
+                    name="isfloweringplant"
+                    value={plantData.isfloweringplant}
+                    onChange={handleInputChange}
+                >   
+                    <option value="" disabled selected hidden>--- Select From Menu ---</option>
+                    <option value={true}>Yes</option>
+                    <option value={false}>No</option>
+                </select>
+            </label>
+            <label htmlFor="soiltype">Soil Type Used: 
+            <input
+                type="text"
+                id="soiltype"
+                name="soiltype"
+                value={plantData.soiltype}
+                onChange={handleInputChange}
+                placeholder="Soil Type Used"
+            />
+            </label>
             <label htmlFor="careinstructions">
             <textarea
                 id="careinstructions"
