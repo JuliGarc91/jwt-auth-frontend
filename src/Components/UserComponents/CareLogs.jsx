@@ -60,7 +60,7 @@ const CareLogs = ( { handleLogout } ) => {
     // using useEffect to add chart
     useEffect(() => {
       if (careLogs.length > 0) {
-      const ctx = document.getElementById('barChart');
+      const ctx = document.getElementById('lineChart');
       if (ctx) {
           if (chartRef.current) {
               // If chart instance already exists, destroy it first because it'll give this error for example: "Uncaught Error: Canvas is already in use. Chart with ID '5' must be destroyed before the canvas with ID 'barChart' can be reused."
@@ -68,7 +68,7 @@ const CareLogs = ( { handleLogout } ) => {
           }
           Chart.defaults.font.size = 18;
           const config = {
-              type: 'bar',
+              type: 'line',
               data: prepareChartData(),
               options: {
                   scales: {
@@ -86,21 +86,21 @@ const CareLogs = ( { handleLogout } ) => {
     const prepareChartData = () => {
       // const labels = careLogs.map(log => new Date(log.caredate).getTime());
       const labels = careLogs.map(log => log.caredate);
-      const soilMoistData = careLogs.map(log => log.soilismoist ? 1 : 0);
+      const soilMoistData = careLogs.map(log => log.soilmoisturepercentdaily);
       const wateringFrequencyData = careLogs.map(log => log.wateringfrequencyperweek);
 // color:rgb(251, 220, 180);
       return {
         labels: labels,
         datasets: [
           {
-              label: 'Soil Moist',
+              label: 'Soil Moisture Percent Daily',
               data: soilMoistData,
               backgroundColor: 'rgba(251, 220, 180, 0.8)',
               borderColor: 'rgba(251, 220, 180, 1)',
               borderWidth: 1
           },
           {
-              label: 'Watering Frequency',
+              label: 'Weekly Watering Frequency',
               data: wateringFrequencyData,
               backgroundColor: 'rgba(75, 192, 192, 0.8)',
               borderColor: 'rgba(75, 192, 192, 1)',
@@ -220,7 +220,7 @@ const CareLogs = ( { handleLogout } ) => {
               </ul>
             )}
           </div>
-          <canvas id="barChart" className="chart"></canvas>
+          <canvas id="lineChart" className="chart"></canvas>
           <br/>
           <br/>
         </section>
