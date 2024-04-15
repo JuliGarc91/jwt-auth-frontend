@@ -334,3 +334,12 @@ footer {
     bottom: 0;
     width: 100vw;
 }
+
+div.not-found {
+    margin: 20vw;
+    color: rgb(215, 40, 40);
+    background-color: rgba(255, 74, 74, 0.482);
+    border-radius: 1rem;
+    border: 2px red dotted;
+    padding: 1rem;
+}

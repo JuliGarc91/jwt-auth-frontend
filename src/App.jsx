@@ -12,6 +12,7 @@ import CareLogs from "./Components/UserComponents/CareLogs";
 import "./App.css";
 import CareLog from "./Components/UserComponents/CareLog";
 import Footer from "./Components/UserComponents/Footer";
+import NotFound from "./Components/NotFound";
 
 
 function App() {
@@ -35,6 +36,10 @@ function App() {
       />
       {/* <h2>Welcome to GardenNook</h2> */}
       <Routes>
+        <Route
+          path="*"
+          element={<NotFound />}
+        />
         <Route path="/" element={<LandingPage />} />
         <Route
           path="/login"
