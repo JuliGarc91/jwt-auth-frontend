@@ -19,9 +19,21 @@ section.navbar-container {
 h1 a {
     font-size: 3rem;
 }
+
 h3 {
     margin-top: 1rem;
 }
+
+h3.watering-h3 {
+    color: rgb(127, 255, 244);
+    background-color: rgba(0, 0, 0, 0.358);
+    display: inline-flex;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    /* margin: auto; */
+}
+
 a, li, p, h3, span {
     text-decoration: none;
     list-style: none;
@@ -320,11 +332,12 @@ button:hover, button:hover a {
     /* color:rgb(251, 220, 180); */
     background-color: rgba(180, 251, 182, 0.724);
     margin:auto;
-    width: 80vw;
+    width: 60vw;
     border-radius: 0.5rem;
     padding: 2rem;
     margin-bottom: 3rem;
 }
+
 table {
     background-color: rgba(0, 0, 0, 0.358);
     color:rgb(251, 220, 180);

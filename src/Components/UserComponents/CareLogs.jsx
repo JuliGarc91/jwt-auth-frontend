@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useOutletContext, useParams, useNavigate } from "react-router-dom";
 import Dashboard from '../Dashboard';
-// import { Line } from 'react-chartjs-2'; // doesn't work for some reason
 import Chart from 'chart.js/auto';
 import 'chartjs-adapter-moment'; // needs this and need to install npm install chartjs-adapter-moment because gotta use a time scale (date) chart.js uses UTC
 
@@ -71,6 +70,14 @@ const CareLogs = ( { handleLogout } ) => {
               type: 'line',
               data: prepareChartData(),
               options: {
+                responsive: true,
+                // https://www.chartjs.org/docs/latest/samples/line/point-styling.html
+    plugins: {
+      title: {
+        display: true,
+        text: (ctx) => 'Point Style: rectRot ' + ctx.chart.data.datasets[0].pointStyle,
+      }
+    },
                   scales: {
                       y: {
                           beginAtZero: true
@@ -81,30 +88,50 @@ const CareLogs = ( { handleLogout } ) => {
           chartRef.current = new Chart(ctx, config);
         }
       }
-    }, [careLogs]);
+    }, [careLogs, careLogs.id]);
 
     const prepareChartData = () => {
       // const labels = careLogs.map(log => new Date(log.caredate).getTime());
       const labels = careLogs.map(log => log.caredate);
-      const soilMoistData = careLogs.map(log => log.soilmoisturepercentdaily);
+      const soilMoistData = careLogs.map(log => log.pottedplant ? log.soilmoisturepercentdaily : 'N/A');
       const wateringFrequencyData = careLogs.map(log => log.wateringfrequencyperweek);
+      const mLofWaterPerWeek = careLogs.map(log => log.mlofwaterperweek);
 // color:rgb(251, 220, 180);
+// mLofWaterPerWeek
       return {
         labels: labels,
         datasets: [
           {
               label: 'Soil Moisture Percent Daily',
               data: soilMoistData,
-              backgroundColor: 'rgba(251, 220, 180, 0.8)',
-              borderColor: 'rgba(251, 220, 180, 1)',
-              borderWidth: 1
+              backgroundColor: 'rgba(167, 42, 42, 0.8)',
+              // for line graph style only next 3 lines
+              pointStyle: 'rectRot',
+              pointRadius: 10,
+              pointHoverRadius: 15,
+
+              borderColor: 'rgba(167, 42, 42, 1)',
+              borderWidth: 2,
           },
           {
               label: 'Weekly Watering Frequency',
               data: wateringFrequencyData,
-              backgroundColor: 'rgba(75, 192, 192, 0.8)',
-              borderColor: 'rgba(75, 192, 192, 1)',
+              backgroundColor: 'rgba(91, 102, 255, 0.8)',
+              pointStyle: 'rectRot',
+              pointRadius: 10,
+              pointHoverRadius: 15,
+              borderColor: 'rgba(91, 102, 255, 1)',
               borderWidth: 1
+          },
+          {
+            label: 'Weekly mL of Water',
+            data: mLofWaterPerWeek,
+            backgroundColor: 'rgba(75, 192, 192, 0.8)',
+            pointStyle: 'rectRot',
+            pointRadius: 10,
+            pointHoverRadius: 15,
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1
           }
         ]
       };
@@ -126,6 +153,8 @@ const CareLogs = ( { handleLogout } ) => {
             </button>
             {!isTableMode ? (
             <>
+            <br/>
+            <h3 className='watering-h3'>Watering Schedule Chart</h3>
               <table>
                 <thead>
                     <tr>
@@ -134,11 +163,12 @@ const CareLogs = ( { handleLogout } ) => {
                         <th>Height (inches)</th>
                         <th>Potted Plant</th>
                         <th>Is Propagated?</th>
-                        <th>Soil is Moist?</th>
+                        <th>Soil Moisture %</th>
                         <th>Needs Water Today?</th>
                         <th>Needs Repotting?</th>
                         <th>Roots healthy?</th>
                         <th>Watering Frequency (weekly)</th>
+                        <th>mL of Water (weekly)</th>
                         <th>Sunlight Hours (Daily)</th>
                         <th>Delete Care Log</th>
                     </tr>
@@ -163,7 +193,7 @@ const CareLogs = ( { handleLogout } ) => {
                             </td>
                             <td>
                               {/* {careLog.soilismoist ? "Yes" : "No"} */}
-                              {careLog.pottedplant ? (careLog.soilismoist ? "Yes" : "No") : 'N/A'}
+                              {careLog.pottedplant ? <p>{careLog.soilmoisturepercentdaily}%</p> : 'N/A'}
                             </td>
                             <td>
                               {careLog.needswatertoday ? "Yes" : "No"}
@@ -176,6 +206,9 @@ const CareLogs = ( { handleLogout } ) => {
                             </td>
                             <td>
                               {careLog.wateringfrequencyperweek}
+                            </td>
+                            <td>
+                              {careLog.mlofwaterperweek}
                             </td>
                             <td>
                               {careLog.sunlighthoursperday}
@@ -210,9 +243,13 @@ const CareLogs = ( { handleLogout } ) => {
                     <p><em>Height:</em> {careLog.heightininches} inch(es)</p>
                     <p><em>Is Currently in Pot?</em> {careLog.pottedplant ? "Yes" : "No"}</p>
                     <p><em>If in a pot is soil moist?</em> {careLog.pottedplant ? (careLog.soilismoist ? "Yes" : "No") : 'N/A'}</p>
+                    <p><em>If in a pot - Percent Soil Moisture</em> {careLog.pottedplant ? <p>{careLog.soilmoisturepercentdaily}%</p> : 'N/A'}</p>
                     <p><em>Plant is Propagation?</em> {careLog.ispropagation ? "Yes" : "No"}</p>
                     <p><em>Needs watering?</em> {careLog.needswatertoday ? "Yes" : "No"}</p>
                     <p><em>Needs to be Re-Potted?</em> {careLog.needsrepotting ? "Yes" : "No"}</p>
+                    <p><em>Watering Frequency per Week:</em>
+                    {careLog.wateringfrequencyperweek}</p>
+                    <p><em>mL of Water per Week</em>{careLog.mlofwaterperweek} mL</p>
                     <p><em>Are The Roots Healthy?</em> {careLog.rootshealthy ? "Yes" : "No"}</p>
                     <button onClick={() => handleDelete(careLog.id)}>Delete Care Log</button>
                   </li>
@@ -220,6 +257,8 @@ const CareLogs = ( { handleLogout } ) => {
               </ul>
             )}
           </div>
+          <h3 className='watering-h3'>Watering Schedule Graph</h3>
+          <br/>
           <canvas id="lineChart" className="chart"></canvas>
           <br/>
           <br/>
