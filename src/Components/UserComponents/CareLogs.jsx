@@ -1,8 +1,19 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react'; // useRef: chartRef won't trigger a re-render, it's useful for storing mutable values that don't need to trigger a re-render - useRef is essential in this context for managing Chart.js instances, accessing DOM elements directly, and ensuring efficient updates without unnecessary re-renders. It plays a crucial role in integrating Chart.js with React while adhering to best practices.
 import { Link, useOutletContext, useParams, useNavigate } from "react-router-dom";
 import Dashboard from '../Dashboard';
-import Chart from 'chart.js/auto';
+import Chart from 'chart.js/auto'; // get everything instead of just line graph
 import 'chartjs-adapter-moment'; // needs this and need to install npm install chartjs-adapter-moment because gotta use a time scale (date) chart.js uses UTC
+
+
+/* useRef notes: 
+Yes, that's correct. Because of React's use of the virtual DOM and its component lifecycle methods, `useRef` is necessary for efficiently managing resources like the Chart.js instance in a React application. Here's how:
+
+1. **Virtual DOM**: React's virtual DOM allows it to efficiently update the UI by minimizing the number of changes required to update the actual DOM. When React components re-render, it compares the virtual DOM with the actual DOM and only applies the necessary updates. `useRef` helps in this process by providing a way to persistently reference elements across renders, allowing React to efficiently manage and update these elements without unnecessary re-renders.
+
+2. **Component Lifecycle Methods**: React components have lifecycle methods like `componentDidMount`, `componentDidUpdate`, and `componentWillUnmount`, among others. These lifecycle methods provide opportunities to perform tasks at different stages of a component's lifecycle, such as fetching data, subscribing to events, or cleaning up resources. `useRef` can be used in conjunction with these lifecycle methods to manage resources like Chart.js instances. For example, you can use `useRef` to store a reference to the Chart.js instance and then perform cleanup operations in the `componentWillUnmount` or `useEffect` cleanup function to prevent memory leaks.
+
+In summary, `useRef` is essential in React applications because it allows for efficient management of resources like Chart.js instances, ensuring proper cleanup and preventing memory leaks, especially in the context of React's virtual DOM and component lifecycle methods.
+*/
 
 const URL = import.meta.env.VITE_BASE_URL;
 const CareLogs = ( { handleLogout } ) => {
@@ -11,7 +22,7 @@ const CareLogs = ( { handleLogout } ) => {
     const { user } = useOutletContext(); // access logged in user details such as id and username
     const { plantId } = useParams();
     const navigate = useNavigate();
-    const chartRef = useRef(null); // gotta use useRef to store the Chart instance because of way react renders stuff / needs to update state
+    const chartRef = useRef(null); // need to use useRef to store the Chart instance - useRef allows us to preserve the state across re-renders.
 
     console.log(plantId);
     console.log(user);
@@ -57,27 +68,59 @@ const CareLogs = ( { handleLogout } ) => {
     }
 
     // using useEffect to add chart
+    /*
+    You will find that any event which causes the chart to re-render, such as hover tooltips, etc., will cause the first dataset to be copied over to other datasets, causing your lines and bars to merge together.
+
+    This is because to track changes in the dataset series, the library needs a key to be specified. If none is found, it can't tell the difference between the datasets while updating. To get around this issue, you can take these two approaches:
+
+    Add a label property to each dataset. By default, this library uses the label property as the key to distinguish datasets.
+    Specify a different property to be used as a key by passing a datasetIdKey prop to your chart component.
+    */
+    /*
+    https://react-chartjs-2.js.org/docs/working-with-events
+    */
     useEffect(() => {
-      if (careLogs.length > 0) {
-      const ctx = document.getElementById('lineChart');
-      if (ctx) {
+      if (careLogs.length >= 0) { // made it also equal to 0 to fix bug! it's not falsy if array has 0 elements! Might be redundant
+      const ctx = document.getElementById('lineChart'); /* instead of using <Line> element from react- chartjs-2 package gets 'lineChart' from import Chart from 'chart.js/auto' package. Graphs a point from each careLog by id using <canvas element with the id lineChart>
+      https://www.chartjs.org/docs/latest/configuration/responsive.html
+      */
+      if (ctx) {// useRef provides a way to directly access and manipulate DOM elements without violating React's principles. Preserving Chart.js instance: By storing the Chart.js instance in the chartRef.current, you have a persistent reference to the current instance of the chart. This allows you to access and manipulate the chart instance across re-renders without losing it.
+
+        /*Destroying the existing instance: Before creating a new Chart.js instance in response to changes in the careLogs state, you need to ensure that any existing instance is properly destroyed to prevent conflicts with the canvas element. You achieve this by calling chartRef.current.destroy().
+        
+        Preventing memory leaks: Without proper cleanup, repeatedly creating new Chart.js instances on the same canvas element without destroying the previous instances can lead to memory leaks. By using useRef and chartRef.current.destroy(), you ensure that resources associated with the previous chart instance are properly cleaned up, preventing memory leaks.
+        
+        In summary, useRef is crucial for managing the Chart.js instance across re-renders and providing a way to clean up the existing instance before creating a new one. This helps prevent conflicts and memory leaks, ultimately ensuring the proper functioning of the chart component.*/
           if (chartRef.current) {
-              // If chart instance already exists, destroy it first because it'll give this error for example: "Uncaught Error: Canvas is already in use. Chart with ID '5' must be destroyed before the canvas with ID 'barChart' can be reused."
-              chartRef.current.destroy();
+              // If chart instance already exists, destroy it first because it'll give this error for example: "Uncaught Error: Canvas is already in use. Chart with ID '5' must be destroyed before the canvas with ID 'barChart' can be reused." If the canvas element exists, it destroys any existing Chart.js instance referenced by chartRef.current. This step ensures that there's no conflict when creating a new chart instance.
+              chartRef.current.destroy(); // bc no key prop will be used for labels - chartRef.current.destroy() is called when the component unmounts. This method is a part of the Chart.js library and is used to properly clean up and release any resources associated with the chart instance. if the careLogs state changes and triggers a re-render of the CareLogs component, the existing canvas element used for the Chart.js chart still remains in the DOM. If you attempt to create a new Chart.js instance on this same canvas element without destroying the existing instance first, you'll encounter the error you described. using useRef to create a mutable reference (chartRef) to the Chart.js instance. This reference allows you to interact with the Chart.js instance across re-renders without triggering unnecessary re-renders.
+
+              /*When the component re-renders due to changes in the careLogs state, you want to update the Chart.js chart accordingly. However, since the canvas element used by Chart.js persists across re-renders, you need a way to manage the existing Chart.js instance.*/
+
+              /*To prevent this error, you're using chartRef.current.destroy() to properly clean up the existing Chart.js instance before creating a new one. This ensures that there's no conflict and that the canvas element is cleared before a new chart instance is created. This cleanup process is necessary to avoid memory leaks and ensure the proper functioning of the chart component.*/
+
+              /*
+              chartRef.current.destroy() is called when the component unmounts. This method is a part of the Chart.js library and is used to properly clean up and release any resources associated with the chart instance.
+              */
           }
+
+          // https://www.chartjs.org/docs/latest/general/fonts.html
           Chart.defaults.font.size = 18;
+
+          // Configure chart: https://www.chartjs.org/docs/latest/samples/line/line.html
           const config = {
               type: 'line',
               data: prepareChartData(),
               options: {
                 responsive: true,
                 // https://www.chartjs.org/docs/latest/samples/line/point-styling.html
-    plugins: {
-      title: {
-        display: true,
-        text: (ctx) => 'Point Style: rectRot ' + ctx.chart.data.datasets[0].pointStyle,
-      }
-    },
+              plugins: {
+                // adding chart title!
+                title: {
+                display: true,
+                text: "Watering Tracking / Care Date"
+                }
+              },
                   scales: {
                       y: {
                           beginAtZero: true
@@ -85,27 +128,32 @@ const CareLogs = ( { handleLogout } ) => {
                   }
               },
           };
+          // makes chart instance using useRef
+          // creates a new Chart.js instance using the configuration and assigns it to chartRef.current
           chartRef.current = new Chart(ctx, config);
         }
       }
-    }, [careLogs, careLogs.id]);
+    }, [careLogs, chartRef.current]);
 
+    // set up chart - https://www.chartjs.org/docs/latest/samples/line/line.html
     const prepareChartData = () => {
-      // const labels = careLogs.map(log => new Date(log.caredate).getTime());
+      // The labels are the care date
       const labels = careLogs.map(log => log.caredate);
+      // Data: https://www.chartjs.org/docs/latest/general/data-structures.html
       const soilMoistData = careLogs.map(log => log.pottedplant ? log.soilmoisturepercentdaily : 'N/A');
       const wateringFrequencyData = careLogs.map(log => log.wateringfrequencyperweek);
       const mLofWaterPerWeek = careLogs.map(log => log.mlofwaterperweek);
-// color:rgb(251, 220, 180);
-// mLofWaterPerWeek
-      return {
+      return { // using canvas element instead of "Line" retrieved from DOM
         labels: labels,
+        // no datasetIdKey='id' prop because not dynamically adding or removing datasets during runtime, so Chart.js can correctly differentiate between datasets based on their properties such as label
         datasets: [
           {
               label: 'Soil Moisture Percent Daily',
               data: soilMoistData,
               backgroundColor: 'rgba(167, 42, 42, 0.8)',
-              // for line graph style only next 3 lines
+              /* https://www.chartjs.org/docs/latest/samples/line/point-styling.html
+              for line graph style only next 3 lines
+              */
               pointStyle: 'rectRot',
               pointRadius: 10,
               pointHoverRadius: 15,
@@ -121,12 +169,12 @@ const CareLogs = ( { handleLogout } ) => {
               pointRadius: 10,
               pointHoverRadius: 15,
               borderColor: 'rgba(91, 102, 255, 1)',
-              borderWidth: 1
+              borderWidth: 1,
           },
           {
             label: 'Weekly mL of Water',
             data: mLofWaterPerWeek,
-            backgroundColor: 'rgba(75, 192, 192, 0.8)',
+            backgroundColor: 'rgba(0, 145, 255, 0.8)',
             pointStyle: 'rectRot',
             pointRadius: 10,
             pointHoverRadius: 15,
