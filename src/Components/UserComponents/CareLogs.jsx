@@ -225,12 +225,12 @@ const CareLogs = ( { handleLogout } ) => {
                       <br />
                       <strong>Care Date for {careLog.plantname}: </strong>{careLog.caredate}
                     </div>
-                    <p><em>Notes: </em>{careLog.description}</p>
+                    <p><em>Notes:</em> {careLog.description}</p>
                     <p><em>Height:</em> {careLog.heightininches} inch(es)</p>
                     <p><em>Plant is Propagation?</em> {careLog.ispropagation ? "Yes" : "No"}</p>
                     <p><em>Sunlight Hours (Daily)</em> {careLog.sunlighthoursperday} hrs</p>
                     <p><em>Percent Soil Moisture</em> {!careLog.ispropagation ? <p>{careLog.soilmoisturepercentdaily}%</p> : 'N/A'}</p>
-                    <p><em>mL Water added today:</em>{careLog.mlwateraddedtoday}</p>
+                    <p><em>mL Water added today:</em> {careLog.mlwateraddedtoday} mL</p>
                     <p><em>Needs to be Re-Potted?</em> {careLog.needsrepotting ? "Yes" : "No"}</p>
                     <button onClick={() => handleDelete(careLog.id)}>Delete Care Log</button>
                   </li>

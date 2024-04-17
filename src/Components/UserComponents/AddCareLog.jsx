@@ -7,17 +7,17 @@ const AddCareLog = () => {
   const { user } = useOutletContext(); // access logged in user details such as id and username
   const navigate = useNavigate();
   const [careLogData, setCareLogData] = useState({
-    careDate: '',
+    caredate: '',
     description: '',
-    imageUrl: '',
-    heightInInches: '',
-    isPropagation: false,
-    needsRepotting: false,
-    wateringFrequencyPerWeek: '',
-    sunlightHoursPerDay: '',
-    soilMoisturePercentDaily: '',
-    mLofWaterPerWeek: '',
-    mLWaterAddedToday: ''
+    imageurl: '',
+    heightininches: '',
+    ispropagation: false,
+    needsrepotting: false,
+    wateringfrequencyperweek: '',
+    sunlighthoursperday: '',
+    soilmoisturepercentdaily: '',
+    mlofwaterperweek: '',
+    mlwateraddedtoday: ''
   });
 
   const handleInputChange = (event) => {
@@ -50,8 +50,8 @@ const AddCareLog = () => {
       onAddPlant(data.careLog);
       return data.careLog;
     })
-    .then(addedCarelog => {
-        navigate(`/plant/${addedCarelog.plantId}/carelogs/`);
+    .then(addedCareLog => {
+        navigate(`/plant/${addedCareLog.plantid}/carelogs/`);
     })
     .catch(error => {
         console.error('Error adding care log:', error);
