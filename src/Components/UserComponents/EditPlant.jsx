@@ -11,15 +11,15 @@ const EditPlant = ({ plant }) => {
         userid: user.id,
         username: user.username,
         name: plant.name, // this is going to be required input so no ternary in case of null / undefined
-        species: plant ? plant.species : "",
-        color: plant ? plant.color : "",
-        planttype: plant ? plant.planttype : "",
-        isfloweringplant: plant ? plant.isfloweringplant : "",
-        soiltype: plant ? plant.soiltype : "",
-        careinstructions: plant ? plant.careinstructions : "",
-        imageurl: plant ? plant.imageurl : ""
+        species: plant.species,
+        color: plant.color,
+        planttype: plant.planttype,
+        isfloweringplant: plant.isfloweringplant,
+        soiltype: plant.soiltype,
+        careinstructions: plant.careinstructions,
+        imageurl: plant.imageurl
     });
-
+console.log(plantData)
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -32,7 +32,8 @@ const EditPlant = ({ plant }) => {
             });
             if (response.ok) {
                 const data = await response.json();
-                console.log('Plant added:', data.plant);
+
+                console.log('Plant edited:', data.plantData);
                 navigate(`/dashboard`);
             } else {
                 console.error('Failed to edit plant:', error);
