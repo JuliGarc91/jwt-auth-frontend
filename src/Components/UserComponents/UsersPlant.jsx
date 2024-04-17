@@ -72,7 +72,6 @@ const UsersPlant = ({ handleLogout }) => {
     </section>
 
     <section className='user-plant-dashboard'>
-{/* plant-details-img */}
 
     {plant.imageurl ? <img className="plant-details-img" src={plant.imageurl} alt={plant.name} /> : <img src={'https://st2.depositphotos.com/3904951/8925/v/450/depositphotos_89250312-stock-illustration-photo-picture-web-icon-in.jpg'} alt={plant.name} />}
         <div className="plant-details">
@@ -100,10 +99,6 @@ const UsersPlant = ({ handleLogout }) => {
           <button>
             <Link to={`/plant/${plant.id}/carelogs`}>Plant Care Logs</Link>
           </button>
-          {/* <button onClick={toggleEditPlantForm}>
-          {showEditPlantForm ? "Hide Form" : "Edit Plant"}
-          </button>
-          {showEditPlantForm && <EditPlant plant={plant} />} */}
         </div>
     </section>
     </>
