@@ -140,7 +140,7 @@ const CareLogs = ( { handleLogout } ) => {
       // The labels are the care date
       const labels = careLogs.map(log => log.caredate);
       // Data: https://www.chartjs.org/docs/latest/general/data-structures.html
-      const soilMoistData = careLogs.map(log => log.pottedplant ? log.soilmoisturepercentdaily : 'N/A');
+      const soilMoistData = careLogs.map(log => !log.ispropagation ? log.soilmoisturepercentdaily : 'N/A');
       const wateringFrequencyData = careLogs.map(log => log.wateringfrequencyperweek);
       const mLofWaterPerWeek = careLogs.map(log => log.mlofwaterperweek);
       return { // using canvas element instead of "Line" retrieved from DOM
@@ -186,6 +186,8 @@ const CareLogs = ( { handleLogout } ) => {
     };
 
 // add function to reverse order of logs by date
+
+
     return (
         <section>
             <Dashboard handleLogout={handleLogout}>
@@ -209,12 +211,11 @@ const CareLogs = ( { handleLogout } ) => {
                         <th>Care Date</th>
                         <th>Plant Name</th>
                         <th>Height (inches)</th>
-                        <th>Potted Plant</th>
+                        
                         <th>Is Propagated?</th>
                         <th>Soil Moisture %</th>
-                        <th>Needs Water Today?</th>
+                        
                         <th>Needs Repotting?</th>
-                        <th>Roots healthy?</th>
                         <th>Watering Frequency (weekly)</th>
                         <th>mL of Water (weekly)</th>
                         <th>Sunlight Hours (Daily)</th>
@@ -233,24 +234,15 @@ const CareLogs = ( { handleLogout } ) => {
                             <td>
                               {careLog.heightininches}
                             </td>
-                            <td>
-                              {careLog.pottedplant ? "Yes" : "No"}
-                            </td>
+                            
                             <td>
                               {careLog.ispropagation ? "Yes" : "No"}
                             </td>
                             <td>
-                              {/* {careLog.soilismoist ? "Yes" : "No"} */}
-                              {careLog.pottedplant ? <p>{careLog.soilmoisturepercentdaily}%</p> : 'N/A'}
-                            </td>
-                            <td>
-                              {careLog.needswatertoday ? "Yes" : "No"}
+                              {careLog.soilmoisturepercentdaily}
                             </td>
                             <td>
                               {careLog.needsrepotting ? "Yes" : "No"}
-                            </td>
-                            <td>
-                              {careLog.rootshealthy ? "Yes" : "No"}
                             </td>
                             <td>
                               {careLog.wateringfrequencyperweek}
@@ -277,7 +269,7 @@ const CareLogs = ( { handleLogout } ) => {
                       {careLog.imageurl ? (
                         <img className="care-logs-img" src={careLog.imageurl} alt={careLog.plantname} />
                       ) : (
-                        <div>No image available</div>
+                        <img className="care-logs-img" src={'https://st2.depositphotos.com/3904951/8925/v/450/depositphotos_89250312-stock-illustration-photo-picture-web-icon-in.jpg'} alt={careLog.plantname} />
                       )}
                       <br />
                       <strong>Care Date for {careLog.plantname}: </strong>{careLog.caredate}
@@ -289,16 +281,13 @@ const CareLogs = ( { handleLogout } ) => {
                       </Link>
                     </button> */}
                     <p><em>Height:</em> {careLog.heightininches} inch(es)</p>
-                    <p><em>Is Currently in Pot?</em> {careLog.pottedplant ? "Yes" : "No"}</p>
-                    <p><em>If in a pot is soil moist?</em> {careLog.pottedplant ? (careLog.soilismoist ? "Yes" : "No") : 'N/A'}</p>
-                    <p><em>If in a pot - Percent Soil Moisture</em> {careLog.pottedplant ? <p>{careLog.soilmoisturepercentdaily}%</p> : 'N/A'}</p>
+                    
+                    <p><em>Percent Soil Moisture</em> {!careLog.ispropagation ? <p>{careLog.soilmoisturepercentdaily}%</p> : 'N/A'}</p>
                     <p><em>Plant is Propagation?</em> {careLog.ispropagation ? "Yes" : "No"}</p>
-                    <p><em>Needs watering?</em> {careLog.needswatertoday ? "Yes" : "No"}</p>
                     <p><em>Needs to be Re-Potted?</em> {careLog.needsrepotting ? "Yes" : "No"}</p>
                     <p><em>Watering Frequency per Week:</em>
                     {careLog.wateringfrequencyperweek}</p>
                     <p><em>mL of Water per Week</em>{careLog.mlofwaterperweek} mL</p>
-                    <p><em>Are The Roots Healthy?</em> {careLog.rootshealthy ? "Yes" : "No"}</p>
                     <button onClick={() => handleDelete(careLog.id)}>Delete Care Log</button>
                   </li>
                 ))}

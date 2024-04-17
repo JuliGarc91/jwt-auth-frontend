@@ -51,7 +51,7 @@ const SearchBar = () => {
                   {!species.default_image || (species.watering.includes("Upgrade Plans To Premium/Supreme - https://perenual.com/subscription-api-pricing. I'm sorry") &&
                   species.cycle.includes("Upgrade Plans To Premium/Supreme - https://perenual.com/subscription-api-pricing. I'm sorry")
                     ) ? (
-                    <p>No Image Available</p>
+                    <img src='https://st2.depositphotos.com/3904951/8925/v/450/depositphotos_89250312-stock-illustration-photo-picture-web-icon-in.jpg'/>
                     ) : (
                     <img src={species.default_image.regular_url} alt={species.common_name} />
                   )}

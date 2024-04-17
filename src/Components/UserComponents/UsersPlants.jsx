@@ -35,6 +35,7 @@ const UsersPlants = () => {
       console.error("Error deleting user's plant:", error);
     }
   };
+  https://st2.depositphotos.com/3904951/8925/v/450/depositphotos_89250312-stock-illustration-photo-picture-web-icon-in.jpg
 
   return (
     <section className='user-plants-dashboard-container'>
@@ -44,7 +45,8 @@ const UsersPlants = () => {
         {userPlants.map(plant => (
           <li key={plant.id} className='user-plants-li'>
             <div className='img-container'>
-              <img src={plant.imageurl} alt={plant.name} />
+              {plant.imageurl ? <img src={plant.imageurl} alt={plant.name} /> : <img src={'https://st2.depositphotos.com/3904951/8925/v/450/depositphotos_89250312-stock-illustration-photo-picture-web-icon-in.jpg'} alt={plant.name} />}
+              
             </div>
             <div className='all-plants-details-dashboard'>
             <div>

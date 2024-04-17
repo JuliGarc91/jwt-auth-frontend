@@ -72,7 +72,7 @@ const UsersPlant = ({ handleLogout }) => {
     </section>
 
     <section className='user-plant-dashboard'>
-        <img className="plant-details-img" src={plant.imageurl} alt={plant.name} />
+    {plant.imageurl ? <img src={plant.imageurl} alt={plant.name} /> : <img src={'https://st2.depositphotos.com/3904951/8925/v/450/depositphotos_89250312-stock-illustration-photo-picture-web-icon-in.jpg'} alt={plant.name} />}
         <div className="plant-details">
           <p>
             <strong>Name:</strong> {plant.name}
@@ -87,7 +87,7 @@ const UsersPlant = ({ handleLogout }) => {
             <strong>Plant Type:</strong> {plant.planttype}
           </p>
           <p>
-            <strong>Is it a flowering Plant?</strong> {plant.isfloweringplant ? "Yes" : "No"}
+            <strong>Is it a flowering Plant?</strong> {!plant.isfloweringplant ? "" : (plant.isfloweringplant ? "Yes" : "No")}
           </p>
           <p>
             <strong>Soil Type Used: </strong> {plant.soiltype}
