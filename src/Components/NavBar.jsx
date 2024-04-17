@@ -6,6 +6,7 @@ const URL = import.meta.env.VITE_BASE_URL;
 
 const NavBar = ({ toggleLogin, handleLogout }) => {
   const [user, setUser] = useState(null);
+  const [loggedInUser, setLoggedInUser] = useState(false);
 
   useEffect(() => {
     if (!toggleLogin) setUser(null);
@@ -27,6 +28,13 @@ const NavBar = ({ toggleLogin, handleLogout }) => {
     }
   }, [toggleLogin]);
 
+  useEffect(()=>{
+    const token = localStorage.getItem("token");
+  
+    if(token) setLoggedInUser(true)
+  
+  },[])
+
   return (
     <>
     <section className="navbar-container">
@@ -38,7 +46,7 @@ const NavBar = ({ toggleLogin, handleLogout }) => {
       </h1>
       </header>
       <div className="nav-links">
-      {!toggleLogin ? (
+      {!toggleLogin || !loggedInUser ? (
         <Link to={"/login"}>
           <span>Login</span>
         </Link>
