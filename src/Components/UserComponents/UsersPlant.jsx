@@ -72,7 +72,9 @@ const UsersPlant = ({ handleLogout }) => {
     </section>
 
     <section className='user-plant-dashboard'>
-    {plant.imageurl ? <img src={plant.imageurl} alt={plant.name} /> : <img src={'https://st2.depositphotos.com/3904951/8925/v/450/depositphotos_89250312-stock-illustration-photo-picture-web-icon-in.jpg'} alt={plant.name} />}
+{/* plant-details-img */}
+
+    {plant.imageurl ? <img className="plant-details-img" src={plant.imageurl} alt={plant.name} /> : <img src={'https://st2.depositphotos.com/3904951/8925/v/450/depositphotos_89250312-stock-illustration-photo-picture-web-icon-in.jpg'} alt={plant.name} />}
         <div className="plant-details">
           <p>
             <strong>Name:</strong> {plant.name}
