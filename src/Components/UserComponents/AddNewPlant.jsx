@@ -13,7 +13,7 @@ const AddNewPlant = ({ handleAddPlant }) => {
         name: "",
         color: "",
         planttype: "",
-        isfloweringplant: false,
+        isfloweringplant: false, // to make disabled select part work
         soiltype: "",
         species: "",
         careinstructions: "",
@@ -123,7 +123,6 @@ return (
                     value={plantData.isfloweringplant}
                     onChange={handleInputChange}
                 >   
-                    <option value="" disabled selected hidden>--- Select From Menu ---</option>
                     <option value={true}>Yes</option>
                     <option value={false}>No</option>
                 </select>

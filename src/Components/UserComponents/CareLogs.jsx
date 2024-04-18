@@ -150,7 +150,7 @@ const CareLogs = ( { handleLogout } ) => {
         <section>
             <Dashboard handleLogout={handleLogout}>
                 {/* add link to care log form once component is created */}
-                <button>Add Care Log</button>
+                {/* <button>Add Care Log</button> */}
                 <button><Link to={`/dashboard`}>Back to Dashboard</Link></button>
                 <button><Link to={`/plant/${plantId}`}>Back to Plant Details</Link></button>
             </Dashboard>

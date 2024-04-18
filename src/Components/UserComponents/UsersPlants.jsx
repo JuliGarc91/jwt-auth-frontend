@@ -65,6 +65,9 @@ const UsersPlants = () => {
             <div>
               <strong>Name:</strong> {plant.name}
             </div>
+            <div>
+              <strong>Flowering Plant? </strong> {!plant.isfloweringplant ? "" : (plant.isfloweringplant ? "Yes" : "No")}
+            </div>
             <button onClick={() => handleDeletePlant(user.id, plant.id)} className='delete-button'>
               Delete
             </button>
