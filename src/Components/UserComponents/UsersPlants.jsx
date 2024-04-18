@@ -1,11 +1,20 @@
 import { useState, useEffect } from 'react';
 import { Link, useOutletContext } from "react-router-dom";
+import AddNewPlant from './AddNewPlant';
 
 const URL = import.meta.env.VITE_BASE_URL
 const UsersPlants = () => {
   const [userPlants, setUserPlants] = useState([]);
+  const [showAddPlantForm, setShowAddPlantForm] = useState(false);
   const { user } = useOutletContext(); // Access user data provided by the Outlet's context
 
+  const toggleAddPlant = () => {
+    setShowAddPlantForm(!showAddPlantForm);
+  }
+  
+  const handleAddPlant = (newPlant) => {
+      setUserPlants([...userPlants, newPlant]);
+  };
   useEffect(() => {
     const fetchUserPlants = async () => {
       try {
@@ -41,6 +50,10 @@ const UsersPlants = () => {
     <section className='user-plants-dashboard-container'>
       {/* <h2>{user.username[0].toUpperCase()}
           {user.username.slice(1).toLowerCase()}'s Plants:</h2> */}
+      <button onClick={toggleAddPlant}>
+        {showAddPlantForm ? "Hide Form" : "Add Plant"}
+      </button>
+        {showAddPlantForm && <AddNewPlant handleAddPlant={handleAddPlant} />}
       <ul className='user-plants-dashboard-ul'>
         {userPlants.map(plant => (
           <li key={plant.id} className='user-plants-li'>
