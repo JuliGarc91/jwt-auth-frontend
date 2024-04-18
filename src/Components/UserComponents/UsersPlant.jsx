@@ -59,10 +59,10 @@ const UsersPlant = ({ handleLogout }) => {
   <>
   <section>
     <Dashboard handleLogout={handleLogout}>
-            <button onClick={toggleEditPlantForm}>
+            {/* <button onClick={toggleEditPlantForm}>
               {showEditPlantForm ? "Hide Form" : "Edit Plant"}
             </button>
-              {showEditPlantForm && <EditPlant plant={plant} />}
+              {showEditPlantForm && <EditPlant plant={plant} />} */}
             <button>
               <Link to={`/dashboard`}>
                 Back to Dashboard
@@ -71,9 +71,17 @@ const UsersPlant = ({ handleLogout }) => {
     </Dashboard>
     </section>
 
-    <section className='user-plant-dashboard'>
+    <button onClick={toggleEditPlantForm}>{showEditPlantForm ? "Hide Form" : "Edit Plant"}
+    </button>
+              {showEditPlantForm && <EditPlant plant={plant} />}
 
+    <section className='user-plant-dashboard'>
+    {/* <button onClick={toggleEditPlantForm}>
+              {showEditPlantForm ? "Hide Form" : "Edit Plant"}
+            </button>
+              {showEditPlantForm && <EditPlant plant={plant} />} */}
     {plant.imageurl ? <img className="plant-details-img" src={plant.imageurl} alt={plant.name} /> : <img src={'https://st2.depositphotos.com/3904951/8925/v/450/depositphotos_89250312-stock-illustration-photo-picture-web-icon-in.jpg'} alt={plant.name} />}
+    
         <div className="plant-details">
           <p>
             <strong>Name:</strong> {plant.name}
@@ -99,6 +107,7 @@ const UsersPlant = ({ handleLogout }) => {
           <button>
             <Link to={`/plant/${plant.id}/carelogs`}>Plant Care Logs</Link>
           </button>
+          
         </div>
     </section>
     </>

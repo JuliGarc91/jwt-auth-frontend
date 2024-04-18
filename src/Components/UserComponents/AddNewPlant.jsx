@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useOutletContext, useNavigate } from "react-router-dom";
 
 const URL = import.meta.env.VITE_BASE_URL;
 
-const AddNewPlant = ({onAddPlant}) => {
+const AddNewPlant = ({ handleAddPlant }) => {
     const { user } = useOutletContext(); // access logged in user details such as id and username
     const navigate = useNavigate();
 
@@ -11,6 +11,10 @@ const AddNewPlant = ({onAddPlant}) => {
         userid: user.id,
         username: user.username,
         name: "",
+        color: "",
+        planttype: "",
+        isfloweringplant: false,
+        soiltype: "",
         species: "",
         careinstructions: "",
         imageurl: ""
@@ -29,22 +33,35 @@ const AddNewPlant = ({onAddPlant}) => {
             if (response.ok) {
                 return response.json();
             } else {
-                throw new Error('Failed to add plant:', error);
+                throw new Error('Failed to add plant:');
             }
         })
         .then(data => {
             console.log("New plant added:", data.plant);
-            onAddPlant(data.plant);
+            handleAddPlant(data.plant);
+            navigate(`/dashboard`);
             return data.plant;
+            
         })
-        .then(addedPlant => {
-            navigate(`/plant/${addedPlant.id}`);
+        .then(() => {
+        setPlantData({
+            userid: user.id,
+            username: user.username,
+            name: "",
+            color: "",
+            planttype: "",
+            isfloweringplant: false,
+            soiltype: "",
+            species: "",
+            careinstructions: "",
+            imageurl: ""
         })
-        .catch(error => {
-            console.error('Error adding plant:', error);
+        //     navigate(`/dashboard`);
+        })
+        .catch(() => {
+            console.log('Error adding plant:');
         });
     };
-    
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -79,7 +96,7 @@ return (
                 placeholder="Species"
             />
             </label>
-            <label htmlFor="color">Color: 
+            <label htmlFor="color"> 
             <input
                 type="text"
                 id="color"
@@ -89,7 +106,7 @@ return (
                 placeholder="Color"
             />
             </label>
-            <label htmlFor="planttype">Plant Type: 
+            <label htmlFor="planttype"> 
             <input
                 type="text"
                 id="planttype"
@@ -99,7 +116,7 @@ return (
                 placeholder="Plant Cycle Type"
             />
             </label>
-            <label htmlFor="isfloweringplant"> Is it a Flowering Plant?
+            <label htmlFor="isfloweringplant">
                 <select
                     id="isfloweringplant"
                     name="isfloweringplant"
@@ -111,7 +128,7 @@ return (
                     <option value={false}>No</option>
                 </select>
             </label>
-            <label htmlFor="soiltype">Soil Type Used: 
+            <label htmlFor="soiltype"> 
             <input
                 type="text"
                 id="soiltype"

@@ -34,7 +34,7 @@ console.log(plantData)
                 const data = await response.json();
 
                 console.log('Plant edited:', data.plantData);
-                navigate(`/dashboard`);
+                navigate(`/plant/${plant.id}`);
             } else {
                 console.error('Failed to edit plant:', error);
             }

@@ -4,17 +4,10 @@ import AddNewPlant from "./UserComponents/AddNewPlant";
 
 const Dashboard = ({ handleLogout, children }) => {
   const { user } = useOutletContext(); // Access user data provided by the Outlet's context
-  const [userPlants, setUserPlants] = useState([]);
-  const [showAddPlantForm, setShowAddPlantForm] = useState(false);
+
   const [isBackgroundImage, setIsBackgroundImage] = useState(false);
 
-  const toggleAddPlant = () => {
-    setShowAddPlantForm(!showAddPlantForm);
-  }
-  
-  const handleAddPlant = (newPlant) => {
-      setUserPlants([...userPlants, newPlant]);
-  };
+
 
   const handleClick = () => {
     setIsBackgroundImage(prevState => !prevState);
@@ -45,10 +38,7 @@ return (
         {!isBackgroundImage? "Dark Mode":"light mode"}
       </button>
 
-      <button onClick={toggleAddPlant}>
-        {showAddPlantForm ? "Hide Form" : "Add Plant"}
-      </button>
-        {showAddPlantForm && <AddNewPlant onAddPlant={handleAddPlant} />}
+      
         {children}
 
     </div>
