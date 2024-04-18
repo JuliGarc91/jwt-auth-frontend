@@ -4,7 +4,7 @@ import SearchBar from "./SearchBar";
 import ShowPlantInfo from "./ShowPlantInfo";
 
 function LandingPage() {
-  const [showPlants, setShowPlants] = useState(false);
+  const [showPlants, setShowPlants] = useState(true);
   const [showPlantInfo, setShowPlantInfo] = useState(false);
 
   const togglePlants = () => {
@@ -29,8 +29,11 @@ function LandingPage() {
             <ShowPlantInfo />
           </div> : ""
         }
-      <button onClick={togglePlants}>
+      {/* <button onClick={togglePlants}>
         {showPlants ? "Hide Plant Library" : "Show Plant Library"}
+      </button> */}
+      <button onClick={togglePlants}>
+        {!showPlants ? "Show Plant Library" : "Hide Plant Library"}
       </button>
       <button>
       <Link to="/dashboard">View Your Dashboard</Link>
