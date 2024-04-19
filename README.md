@@ -1,7 +1,7 @@
 
 ![sunflowers](./src/images/sunflowers.jpg)
 
-# <center>Garden Nook</center>
+# Garden Nook
 
 Welcome to <strong>Garden Nook</strong>! This application helps you keep track of your plants and their care routines. Whether you're a seasoned plant parent or just starting out, this app will assist you in providing the best care for your green friends.
 ---
@@ -20,15 +20,15 @@ To get started with the Plant Care Application, follow these steps:
    ```
    git clone https://github.com/JuliGarc91/jwt-auth-backend.git
    ```
-   - run `npm run db:init` then run `npm run db:seed` in your terminal to get data from postgreSQL database.
 
 3. **Install Dependencies:**
-   - Navigate to the root directory of the cloned repository.
+   - Navigate to the root directory of the cloned repositories.
    - Run the following command to install the required dependencies:
      ```
      npm install
      ```
-
+   - In backend repository run `npm run db:init` then run `npm run db:seed` in your terminal to get data from postgreSQL database.
+   
 4. **Environment Variables:**
    - Create a `.env` file in the root directory of the project.
    - Define the following environment variables in the `.env` file:
