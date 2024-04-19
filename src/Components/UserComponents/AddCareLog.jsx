@@ -13,10 +13,10 @@ const AddCareLog = () => {
     heightininches: '',
     ispropagation: false,
     needsrepotting: false,
-    wateringfrequencyperweek: '',
+    // wateringfrequencyperweek: '',
     sunlighthoursperday: '',
     soilmoisturepercentdaily: '',
-    mlofwaterperweek: '',
+    // mlofwaterperweek: '',
     mlwateraddedtoday: ''
   });
 
