@@ -1,21 +1,18 @@
 import { useState } from "react";
-import { Link, useOutletContext } from "react-router-dom";
-import AddNewPlant from "./UserComponents/AddNewPlant";
+import { useOutletContext } from "react-router-dom";
 
 const Dashboard = ({ handleLogout, children }) => {
   const { user } = useOutletContext(); // Access user data provided by the Outlet's context
 
   const [isBackgroundImage, setIsBackgroundImage] = useState(false);
 
-
-
   const handleClick = () => {
     setIsBackgroundImage(prevState => !prevState);
     const body = document.body;
     if (isBackgroundImage) {
-      body.style.backgroundImage = `url(https://images.unsplash.com/photo-1555465910-31f7f20a184d?q=80&w=1590&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)`;
+      body.style.backgroundImage = `url(https://res.cloudinary.com/dwygxzqku/image/upload/v1713543909/Garden%20Nook/darkmode-theme-background2.avif)`;
     } else {
-      body.style.backgroundImage = `url(https://images.unsplash.com/photo-1480250555643-539ea5d6d746?q=80&w=3431&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)`;
+      body.style.backgroundImage = `url(https://res.cloudinary.com/dwygxzqku/image/upload/v1713545802/Garden%20Nook/lightmode-theme-background1.jpg)`;
     }
   };
 
@@ -35,12 +32,9 @@ return (
       </button>
 
       <button onClick={handleClick}>
-        {!isBackgroundImage? "Dark Mode":"light mode"}
+        {!isBackgroundImage? "Dark Theme":"Light Theme"}
       </button>
-
-      
-        {children}
-
+      {children}
     </div>
   </section>
   );

@@ -1,5 +1,5 @@
 body {
-    background-color: rgba(0, 48, 0, 0.5);
+    background-color: rgb(122, 255, 197);
     color: rgb(25, 62, 13);
     text-align: center;
     font-size: 20px;
@@ -13,7 +13,7 @@ section.navbar-container {
     background-position: center;
     width:100%;
     background-color: rgb(25, 62, 13);
-    background: url(https://images.unsplash.com/photo-1533563906091-fdfdffc3e3c4?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+    background: url(https://res.cloudinary.com/dwygxzqku/image/upload/v1713544491/Garden%20Nook/darkmode-theme-background1.avif);
 }
 
 h1 a {
@@ -323,7 +323,7 @@ a.logout-link span {
 }
 
 button:hover, button:hover a {
-    background: url(https://images.unsplash.com/photo-1588822172033-964244c83ab5?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+    background: url(https://res.cloudinary.com/dwygxzqku/image/upload/v1713543898/Garden%20Nook/button-hover.avif);
     background-size: cover;
     background-position: center;
     color: rgb(45, 3, 3);
@@ -365,7 +365,7 @@ th, td {
     border-radius: 0.5rem;
 }
 footer {
-    background: url(https://images.unsplash.com/photo-1533563906091-fdfdffc3e3c4?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+    background: url(https://res.cloudinary.com/dwygxzqku/image/upload/v1713544491/Garden%20Nook/darkmode-theme-background1.avif);
     background-size: cover;
     position: fixed;
     bottom: 0;
@@ -373,9 +373,10 @@ footer {
 }
 
 div.not-found {
-    margin: 20vw;
-    color: rgb(215, 40, 40);
-    background-color: rgba(255, 74, 74, 0.482);
+    margin: 10vw auto;
+    width: fit-content;
+    color: rgb(255, 255, 105);
+    background-color: rgba(255, 119, 119, 0.752);
     border-radius: 1rem;
     border: 2px red dotted;
     padding: 1rem;

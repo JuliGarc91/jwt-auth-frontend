@@ -22,7 +22,7 @@ function LandingPage() {
         <h3>Welcome to GardenNook 🌻</h3>
         <p className="welcome">Search for any plant or its attributes and discover expert care advice tailored just for it. Let's grow together!</p>
       <button onClick={togglePlantInfo}>
-        {showPlantInfo ? "Hide Plant Info" : "Show Plant Info"}
+        {showPlantInfo ? "Hide Plant Cycle Information" : "Show Plant Cycle Information"}
       </button>
         {showPlantInfo ? 
           <div>
