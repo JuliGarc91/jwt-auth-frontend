@@ -7,8 +7,6 @@ const Dashboard = ({ handleLogout, children }) => {
 
   const [isBackgroundImage, setIsBackgroundImage] = useState(false);
 
-
-
   const handleClick = () => {
     setIsBackgroundImage(prevState => !prevState);
     const body = document.body;
@@ -18,7 +16,6 @@ const Dashboard = ({ handleLogout, children }) => {
       body.style.backgroundImage = `url(https://images.unsplash.com/photo-1480250555643-539ea5d6d746?q=80&w=3431&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)`;
     }
   };
-
 
 return (
   <section className="dashboard">
@@ -35,7 +32,7 @@ return (
       </button>
 
       <button onClick={handleClick}>
-        {!isBackgroundImage? "Dark Mode":"light mode"}
+        {!isBackgroundImage? "Dark Theme":"Light Theme"}
       </button>
 
       

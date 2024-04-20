@@ -10,7 +10,7 @@ const EditPlant = ({ plant }) => {
     const [plantData, setPlantData] = useState({
         userid: user.id,
         username: user.username,
-        name: plant.name, // this is going to be required input so no ternary in case of null / undefined
+        name: plant.name,
         species: plant.species,
         color: plant.color,
         planttype: plant.planttype,

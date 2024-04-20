@@ -48,6 +48,7 @@ function App() {
         />
         <Route element={<ProtectedRoute />}>
           {/* Place protected routes here */}
+          {/* add route for edit plant form instead to fix bug */}
           <Route
           path="*"
           element={<NotFound />}

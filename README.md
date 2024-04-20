@@ -4,10 +4,12 @@
 # Garden Nook
 
 Welcome to <strong>Garden Nook</strong>! This application helps you keep track of your plants and their care routines. Whether you're a seasoned plant parent or just starting out, this app will assist you in providing the best care for your green friends.
+
+To use the web application navigate to: 
 ---
 ### Getting Started
 
-To get started with the Plant Care Application, follow these steps:
+To get started with the Plant Care Application in your local machine, follow these steps:
 
 1. **Clone the Repository:** 
    Fork then clone this frontend repository to your local machine using the following command:

@@ -13,7 +13,7 @@ const AddNewPlant = ({ handleAddPlant }) => {
         name: "",
         color: "",
         planttype: "",
-        isfloweringplant: false, // to make disabled select part work
+        isfloweringplant: false,
         soiltype: "",
         species: "",
         careinstructions: "",

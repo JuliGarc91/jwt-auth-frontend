@@ -44,22 +44,20 @@ const UsersPlants = () => {
       console.error("Error deleting user's plant:", error);
     }
   };
-  https://st2.depositphotos.com/3904951/8925/v/450/depositphotos_89250312-stock-illustration-photo-picture-web-icon-in.jpg
 
   return (
     <section className='user-plants-dashboard-container'>
-      {/* <h2>{user.username[0].toUpperCase()}
-          {user.username.slice(1).toLowerCase()}'s Plants:</h2> */}
+
       <button onClick={toggleAddPlant}>
         {showAddPlantForm ? "Hide Form" : "Add Plant"}
       </button>
         {showAddPlantForm && <AddNewPlant handleAddPlant={handleAddPlant} />}
+
       <ul className='user-plants-dashboard-ul'>
         {userPlants.map(plant => (
           <li key={plant.id} className='user-plants-li'>
             <div className='img-container'>
               {plant.imageurl ? <img src={plant.imageurl} alt={plant.name} /> : <img src={'https://st2.depositphotos.com/3904951/8925/v/450/depositphotos_89250312-stock-illustration-photo-picture-web-icon-in.jpg'} alt={plant.name} />}
-              
             </div>
             <div className='all-plants-details-dashboard'>
             <div>
