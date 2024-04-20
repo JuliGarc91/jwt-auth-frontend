@@ -1,11 +1,12 @@
-import { useState } from "react";
-import { useOutletContext, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useOutletContext, useNavigate, useParams } from "react-router-dom";
 
 const URL = import.meta.env.VITE_BASE_URL;
 
-const EditPlant = ({ plant }) => {
+const EditPlant = ({ plant, setPlant }) => {
     const { user } = useOutletContext(); // access logged in user details such as id and username
     const navigate = useNavigate();
+    const { id } = useParams();
 
     const [plantData, setPlantData] = useState({
         userid: user.id,
@@ -23,7 +24,7 @@ console.log(plantData)
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch(`${URL}/api/users/${user.id}/userPlants/${plant.id}`, {
+            const response = await fetch(`${URL}/api/users/${user.id}/userPlants/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -33,9 +34,13 @@ console.log(plantData)
             if (response.ok) {
                 const data = await response.json();
 
-                console.log('Plant edited:', data.plantData);
+                console.log('Plant edited:', data);
+                setPlant(data)
+                setPlantData(data)
+                navigate(`/plant/${id}`)
+                console.log('plant edited and navigated to different page:', data)
                 // navigate(`/plant/${plant.id}`);
-                navigate(`/dashboard`); // until bug to update page with new data is fixed
+                // navigate(`/plant/${plant.id}`); // until bug to update page with new data is fixed
             } else {
                 console.error('Failed to edit plant:', error);
             }
@@ -43,6 +48,12 @@ console.log(plantData)
             console.error('Error editing plant:', error);
         }
     };
+
+    useEffect(() => {
+        console.log('Plant edited:', plant);
+        navigate(`/plant/${id}`);
+    }, [plant, plantData]);
+    
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
