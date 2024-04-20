@@ -45,6 +45,8 @@ const UsersPlants = () => {
     }
   };
 
+  // add pie chart for flowering vs non-flowering plants like ferns - reuse code in careLogs.jsx but change chart type to pieChart and pie
+
   return (
     <section className='user-plants-dashboard-container'>
 
