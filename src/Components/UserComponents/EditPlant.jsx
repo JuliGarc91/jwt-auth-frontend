@@ -1,11 +1,12 @@
-import { useState } from "react";
-import { useOutletContext, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useOutletContext, useNavigate, useParams } from "react-router-dom";
 
 const URL = import.meta.env.VITE_BASE_URL;
 
-const EditPlant = ({ plant }) => {
+const EditPlant = ({ plant, setPlant }) => {
     const { user } = useOutletContext(); // access logged in user details such as id and username
     const navigate = useNavigate();
+    const { id } = useParams();
 
     const [plantData, setPlantData] = useState({
         userid: user.id,
@@ -23,7 +24,7 @@ console.log(plantData)
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch(`${URL}/api/users/${user.id}/userPlants/${plant.id}`, {
+            const response = await fetch(`${URL}/api/users/${user.id}/userPlants/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -32,10 +33,9 @@ console.log(plantData)
             });
             if (response.ok) {
                 const data = await response.json();
-
-                console.log('Plant edited:', data.plantData);
-                // navigate(`/plant/${plant.id}`);
-                navigate(`/dashboard`); // until bug to update page with new data is fixed
+                setPlant(data.userPlant)
+                setPlantData(data.userPlant)
+                navigate(`/plant/${id}`)
             } else {
                 console.error('Failed to edit plant:', error);
             }
@@ -44,6 +44,12 @@ console.log(plantData)
         }
     };
 
+    useEffect(() => {
+        console.log('Plant edited:', plant);
+        navigate(`/plant/${id}`);
+    }, [plant, plantData]);
+    
+
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         setPlantData({
@@ -51,22 +57,6 @@ console.log(plantData)
           [name]: value,
         });
     };
-
-    /*
-  CREATE TABLE plants (
-    id SERIAL PRIMARY KEY,
-    userId INTEGER NOT NULL,
-    name VARCHAR(255) NOT NULL,
-    species VARCHAR(255),
-    color VARCHAR(255),
-    plantType VARCHAR(255),
-    isFloweringPlant BOOLEAN,
-    soilType VARCHAR(255),
-    careInstructions TEXT,
-    imageUrl TEXT,
-    FOREIGN KEY (userId) REFERENCES users(id)
-  );
-*/
 
     return (
         <div className="edit-plant-form">

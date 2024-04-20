@@ -5,7 +5,7 @@ import EditPlant from './EditPlant';
 
 const URL = import.meta.env.VITE_BASE_URL;
 const UsersPlant = ({ handleLogout }) => {
-  const [plant, setPlant] = useState(null);
+  const [plant, setPlant] = useState("");
   const [showEditPlantForm, setShowEditPlantForm] = useState(false);
   const { user } = useOutletContext(); // Access user data provided by the Outlet's context
   const { id } = useParams();
@@ -25,7 +25,7 @@ const UsersPlant = ({ handleLogout }) => {
         setPlant(data.plant);
       } catch (error) {
         console.error('Error fetching plant:', error);
-        setPlant(null); // Reset plant state
+        setPlant(""); // Reset plant state
       }
     };
     fetchPlant();
@@ -33,7 +33,7 @@ const UsersPlant = ({ handleLogout }) => {
     https://react.dev/reference/react/useEffect#useeffect
     https://react.dev/reference/react/useEffect#parameters
     */
-    return () => setPlant(null);
+    return () => setPlant("");
   }, [user.id, id]);
 
   if (!plant) {
@@ -73,7 +73,7 @@ const UsersPlant = ({ handleLogout }) => {
 
     <button onClick={toggleEditPlantForm}>{showEditPlantForm ? "Hide Form" : "Edit Plant"}
     </button>
-              {showEditPlantForm && <EditPlant plant={plant} />}
+              {showEditPlantForm && <EditPlant plant={plant} setPlant={setPlant} />}
 
     <section className='user-plant-dashboard'>
     {/* <button onClick={toggleEditPlantForm}>
