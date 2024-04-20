@@ -195,7 +195,9 @@ section.user-plant-dashboard, section.about {
     margin-bottom: 4rem;
 }
 section.about {
-    margin:20vh;
+    margin:20vh auto;
+    width: fit-content;
+    padding: 2rem;
     border-radius: 30px;
     background-color: rgba(0, 0, 0, 0.647);
 }
