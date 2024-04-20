@@ -19,7 +19,7 @@ function LandingPage() {
   <>
     <section className="landing">
       <div className="welcome">
-        <h3>Welcome to GardenNook 🌻</h3>
+        <h3>Welcome to Garden Nook 🌻</h3>
         <p className="welcome">Search for any plant or its attributes and discover expert care advice tailored just for it. Let's grow together!</p>
       <button onClick={togglePlantInfo}>
         {showPlantInfo ? "Hide Plant Cycle Information" : "Show Plant Cycle Information"}
@@ -29,9 +29,6 @@ function LandingPage() {
             <ShowPlantInfo />
           </div> : ""
         }
-      {/* <button onClick={togglePlants}>
-        {showPlants ? "Hide Plant Library" : "Show Plant Library"}
-      </button> */}
       <button onClick={togglePlants}>
         {!showPlants ? "Show Plant Library" : "Hide Plant Library"}
       </button>

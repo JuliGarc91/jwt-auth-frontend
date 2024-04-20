@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react'; 
 import { Link, useOutletContext, useParams, useNavigate } from "react-router-dom";
 import Dashboard from '../Dashboard';
-import Chart from 'chart.js/auto'; // get everything instead of just line graph
-import 'chartjs-adapter-moment'; // needs this and need to install npm install chartjs-adapter-moment because gotta use a time scale (date) chart.js uses UTC
+import Chart from 'chart.js/auto'; // get everything instead of just line graph (change 'line' to 'bar' for bar graph)
+import 'chartjs-adapter-moment'; // import to use a time scale (date) - chart.js uses UTC
 
 const URL = import.meta.env.VITE_BASE_URL;
 const CareLogs = ( { handleLogout } ) => {
@@ -11,10 +11,8 @@ const CareLogs = ( { handleLogout } ) => {
     const { user } = useOutletContext(); // access logged in user details such as id and username
     const { plantId } = useParams();
     const navigate = useNavigate();
-    const chartRef = useRef(null); // need to use useRef to store the Chart instance - useRef allows us to preserve the state across re-renders.
+    const chartRef = useRef(null); // stores the Chart instance - useRef allows preservation of the state across re-renders.
 
-    console.log(plantId);
-    console.log(user);
     useEffect(() => {
         const fetchCareLogs = async () => {
             try {
@@ -55,8 +53,9 @@ const CareLogs = ( { handleLogout } ) => {
         console.error("Error occurred while deleting care log:", error);
       })
     }
-    // --- Line Chart ---
-    // https://react-chartjs-2.js.org/docs/working-with-events
+
+// --- Line Chart: ---
+    // configs chart
     useEffect(() => {
       if (careLogs.length >= 0) { 
       const ctx = document.getElementById('lineChart');
@@ -77,7 +76,6 @@ const CareLogs = ( { handleLogout } ) => {
                 responsive: true,
                 // https://www.chartjs.org/docs/latest/samples/line/point-styling.html
               plugins: {
-                // adding chart title!
                 title: {
                 display: true,
                 text: "Growth Rate"
@@ -96,7 +94,7 @@ const CareLogs = ( { handleLogout } ) => {
       }
     }, [careLogs, chartRef.current]);
 
-    // set up chart - https://www.chartjs.org/docs/latest/samples/line/line.html
+    // actually sets up chart - https://www.chartjs.org/docs/latest/samples/line/line.html
     const prepareChartData = () => {
       // Data: https://www.chartjs.org/docs/latest/general/data-structures.html
       const labels = careLogs.map(log => log.caredate); 
@@ -116,7 +114,6 @@ const CareLogs = ( { handleLogout } ) => {
               pointStyle: 'rectRot',
               pointRadius: 10,
               pointHoverRadius: 15,
-
               borderColor: 'rgba(8, 62, 8, 1)',
               borderWidth: 2,
           },
@@ -220,7 +217,7 @@ const CareLogs = ( { handleLogout } ) => {
                       {careLog.imageurl ? (
                         <img className="care-logs-img" src={careLog.imageurl} alt={careLog.plantname} />
                       ) : (
-                        <img className="care-logs-img" src={'https://st2.depositphotos.com/3904951/8925/v/450/depositphotos_89250312-stock-illustration-photo-picture-web-icon-in.jpg'} alt={careLog.plantname} />
+                        <img className="care-logs-img" src={'https://res.cloudinary.com/dwygxzqku/image/upload/v1713631071/Garden%20Nook/user-no-photo-uploaded.webp'} alt={careLog.plantname} />
                       )}
                       <br />
                       <strong>Care Date for {careLog.plantname}: </strong>{careLog.caredate}
@@ -239,8 +236,10 @@ const CareLogs = ( { handleLogout } ) => {
             )}
           </div>
           <h3 className='watering-h3'>Plant Growth Graph</h3>
-          <br/>
-          <canvas id="lineChart" className="chart"></canvas>
+          
+          <div className='canvas'>
+            <canvas id="lineChart" className="chart"></canvas>
+          </div>
           <br/>
           <br/>
         </section>
