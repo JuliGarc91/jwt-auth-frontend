@@ -13,6 +13,7 @@ import "./App.css";
 import CareLog from "./Components/UserComponents/CareLog";
 import Footer from "./Components/UserComponents/Footer";
 import NotFound from "./Components/NotFound";
+import About from "./Components/About";
 
 
 function App() {
@@ -45,6 +46,10 @@ function App() {
         <Route
           path="/register"
           element={<Register setToggleLogin={setToggleLogin} />}
+        />
+        <Route
+          path="/about"
+          element={<About />}
         />
         <Route element={<ProtectedRoute />}>
           {/* Place protected routes here */}

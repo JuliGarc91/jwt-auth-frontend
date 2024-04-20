@@ -89,7 +89,7 @@ img.plant-details-img {
     border: 2px dotted rgb(246, 203, 153);;
 }
 
-img.care-logs-img{
+img.care-logs-img, img.about{
     min-width: 20rem;
     min-height: 20rem;
     width: 30px;
@@ -149,7 +149,7 @@ li.carelogs-li {
     height: min-content;
 }
 
-div.plant-details {
+div.plant-details, div.about {
     width: 20vw;
     padding: 3rem;
     background-color: rgba(0, 0, 0, 0.338);
@@ -185,7 +185,7 @@ section.dashboard {
     margin-bottom: 1rem;
 }
 
-section.user-plant-dashboard {
+section.user-plant-dashboard, section.about {
     background-color: rgba(0, 0, 0, 0.358);
     padding: 2rem;
     display: flex;
@@ -194,7 +194,11 @@ section.user-plant-dashboard {
     margin: auto;
     margin-bottom: 4rem;
 }
-
+section.about {
+    margin:20vh;
+    border-radius: 30px;
+    background-color: rgba(0, 0, 0, 0.647);
+}
 section.user-plants-dashboard-container {
     margin-bottom: 4rem;
 }
@@ -365,6 +369,21 @@ footer {
     width: 100vw;
 }
 
+img.git-hub {
+    min-width: 10px;
+    min-height: 10px;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    padding: 0%;
+    margin-bottom: 0.5rem;
+    border: none;
+}
+div.git-hub {
+    width:10%;
+    margin: auto;
+}
+
 div.not-found {
     margin: 10vw auto;
     width: fit-content;
@@ -373,4 +392,48 @@ div.not-found {
     border-radius: 1rem;
     border: 2px red dotted;
     padding: 1rem;
+}
+
+@media screen and (max-width:440px) {
+    section.navbar-container {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+    }
+}
+@media screen and (max-width:840px) {
+    body {
+        margin: 0 auto;
+        width: 100%;
+    }
+    section.user-plant-dashboard {
+        background-color: rgba(0, 0, 0, 0.358);
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        margin-bottom: 4rem;
+    }
+    img.plant-details-img {
+        min-width: 100%;
+        min-height: 100%;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        border-radius: 10%;
+        padding: 1rem 1rem 1rem 1rem;
+        margin-top: 1rem;
+        border: 2px dotted rgb(246, 203, 153);;
+    }
+    section.about {
+        flex-direction: column;
+    }
+    div.plant-details, div.about {
+        width: 80%;
+    }
 }
