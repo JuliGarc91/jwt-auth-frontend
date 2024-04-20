@@ -33,14 +33,9 @@ console.log(plantData)
             });
             if (response.ok) {
                 const data = await response.json();
-
-                console.log('Plant edited:', data);
-                setPlant(data)
-                setPlantData(data)
+                setPlant(data.userPlant)
+                setPlantData(data.userPlant)
                 navigate(`/plant/${id}`)
-                console.log('plant edited and navigated to different page:', data)
-                // navigate(`/plant/${plant.id}`);
-                // navigate(`/plant/${plant.id}`); // until bug to update page with new data is fixed
             } else {
                 console.error('Failed to edit plant:', error);
             }
@@ -62,22 +57,6 @@ console.log(plantData)
           [name]: value,
         });
     };
-
-    /*
-  CREATE TABLE plants (
-    id SERIAL PRIMARY KEY,
-    userId INTEGER NOT NULL,
-    name VARCHAR(255) NOT NULL,
-    species VARCHAR(255),
-    color VARCHAR(255),
-    plantType VARCHAR(255),
-    isFloweringPlant BOOLEAN,
-    soilType VARCHAR(255),
-    careInstructions TEXT,
-    imageUrl TEXT,
-    FOREIGN KEY (userId) REFERENCES users(id)
-  );
-*/
 
     return (
         <div className="edit-plant-form">
