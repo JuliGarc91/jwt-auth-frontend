@@ -423,7 +423,7 @@ div.modal {
 /* the actual modal */
 div.modal-content {
     background-color: rgba(255, 124, 139, 0.711);
-    margin: 15% auto;
+    margin: 9% auto;
     padding: 0rem 2rem 1rem 2rem;
     border: 0.15rem dotted #ebec9a;
     width: fit-content;
