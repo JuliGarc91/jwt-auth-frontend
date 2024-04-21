@@ -410,20 +410,7 @@ div.not-found {
 /* Modal css: https://www.w3schools.com/howto/howto_css_modals.asp */
 
 /* dimming app background */
-header.modal-header span.close {
-    /* position: absolute;
-    top: 10px;
-    right: 10px; */
-    display: flex;
-    flex-direction: row-reverse;
-    margin-bottom: 1rem;
-    font-size: 3rem;
-    color: rgb(251, 220, 180);
-    cursor: pointer;
-}
-
-.modal {
-    
+div.modal {
     position: fixed;
     z-index: 1;
     left: 0;
@@ -432,12 +419,9 @@ header.modal-header span.close {
     height: 100%;
     background-color: rgba(0,0,0,0.7);
 }
-.modal p {
-    color:rgb(217, 255, 225);
-}
 
 /* the actual modal */
-.modal-content {
+div.modal-content {
     background-color: rgba(255, 124, 139, 0.711);
     margin: 15% auto;
     padding: 0rem 2rem 1rem 2rem;
@@ -446,7 +430,30 @@ header.modal-header span.close {
     border-radius: 2rem;
 }
 
+div.modal p {
+    color:rgb(217, 255, 225);
+}
+
+header.modal-header span.close {
+    display: flex;
+    width: min-content;
+    margin-bottom: 1rem;
+    font-size: 3rem;
+    color: rgb(251, 220, 180);
+    cursor: pointer;
+}
+
 @media screen and (max-width:440px) {
+    table {
+        width: 1vw;
+        margin:auto;
+    }
+    th {
+        font-size: 1px;
+    }
+    td {
+        font-size: 0.10rem;
+    }
     section.navbar-container {
         display: flex;
         justify-content: space-between;
@@ -488,5 +495,15 @@ header.modal-header span.close {
     }
     div.plant-details, div.about {
         width: 80%;
+    }
+    table {
+        width: 90%;
+        margin:auto;
+    }
+    th {
+        font-size: 1rem;
+    }
+    td {
+        font-size: 1rem;
     }
 }

@@ -5,10 +5,10 @@ const Modal = ({ isOpen, onCancel, onConfirm }) => {
     const pathname = location.pathname;
   
     let message;
-    if (pathname.includes('/plant/') && pathname.split('/').length === 3) {
-      message = "Are you sure you want to delete this plant?";
+    if (pathname.includes('/plant/') && pathname.split('/').length === 3) { // :id length is 3
+      message = "Are you sure you want to delete this plant and all its care logs?";
     } else if (pathname.includes('/plant/') && pathname.includes('/carelogs/')) {
-      message = "Are you sure you want to delete selected care log?";
+      message = "Are you sure you want to delete the selected care log?";
     } else {
       message = "Are you sure you want to delete this item?";
     }
