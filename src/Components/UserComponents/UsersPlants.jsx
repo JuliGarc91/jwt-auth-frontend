@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useOutletContext } from "react-router-dom";
 import AddNewPlant from './AddNewPlant';
+import Modal from './Modal';
 
 const URL = import.meta.env.VITE_BASE_URL
 const UsersPlants = () => {

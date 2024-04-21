@@ -3,6 +3,7 @@ import { Link, useOutletContext, useParams, useNavigate } from "react-router-dom
 import Dashboard from '../Dashboard';
 import Chart from 'chart.js/auto'; // get everything instead of just line graph (change 'line' to 'bar' for bar graph)
 import 'chartjs-adapter-moment'; // import to use a time scale (date) - chart.js uses UTC
+import Modal from './Modal';
 
 const URL = import.meta.env.VITE_BASE_URL;
 const CareLogs = ( { handleLogout } ) => {
