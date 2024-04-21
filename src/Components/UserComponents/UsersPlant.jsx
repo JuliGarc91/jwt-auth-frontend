@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react';
-import { Link, useOutletContext, useParams } from "react-router-dom";
+import { Link, useOutletContext, useParams, useNavigate } from "react-router-dom";
 import Dashboard from '../Dashboard';
 import EditPlant from './EditPlant';
+import Modal from './Modal';
 
 const URL = import.meta.env.VITE_BASE_URL;
 const UsersPlant = ({ handleLogout }) => {
   const [plant, setPlant] = useState("");
   const [showEditPlantForm, setShowEditPlantForm] = useState(false);
-  const { user } = useOutletContext(); // Access user data provided by the Outlet's context
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
+  const { user } = useOutletContext();
   const { id } = useParams();
 
   const toggleEditPlantForm = () => {
@@ -25,63 +28,59 @@ const UsersPlant = ({ handleLogout }) => {
         setPlant(data.plant);
       } catch (error) {
         console.error('Error fetching plant:', error);
-        setPlant(""); // Reset plant state
+        setPlant(""); // Reset plant state if error
       }
     };
     fetchPlant();
-    /* cleanup fx
-    https://react.dev/reference/react/useEffect#useeffect
-    https://react.dev/reference/react/useEffect#parameters
-    */
+    // cleanup fx: https://react.dev/reference/react/useEffect#parameters
     return () => setPlant("");
   }, [user.id, id]);
 
   if (!plant) {
     return <div>Loading...</div>;
   }
+// --- delete fx ---
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
 
-/*
-  CREATE TABLE plants (
-    id SERIAL PRIMARY KEY,
-    userId INTEGER NOT NULL,
-    name VARCHAR(255) NOT NULL,
-    species VARCHAR(255),
-    color VARCHAR(255),
-    plantType VARCHAR(255),
-    isFloweringPlant BOOLEAN,
-    soilType VARCHAR(255),
-    careInstructions TEXT,
-    imageUrl TEXT,
-    FOREIGN KEY (userId) REFERENCES users(id)
-  );
-*/
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleDeletePlant = async (user, id) => {
+    try {
+      const response = await fetch(`${URL}/api/users/${user.id}/userPlants/${id}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        setPlant(plant.id !== id);
+      } else {
+        console.error('Failed to delete user plant:');
+      }
+      navigate('/dashboard');
+    } catch (error) {
+      console.error("Error deleting user's plant:", error);
+    }
+  };
+
   return (
   <>
-  <section>
-    <Dashboard handleLogout={handleLogout}>
-            {/* <button onClick={toggleEditPlantForm}>
-              {showEditPlantForm ? "Hide Form" : "Edit Plant"}
-            </button>
-              {showEditPlantForm && <EditPlant plant={plant} />} */}
-            <button>
-              <Link to={`/dashboard`}>
-                Back to Dashboard
-              </Link>
-            </button>
-    </Dashboard>
+    <section>
+      <Dashboard handleLogout={handleLogout}>
+        <button>
+          <Link to={`/dashboard`}>
+            Back to Dashboard
+          </Link>
+        </button>
+      </Dashboard>
     </section>
-
     <button onClick={toggleEditPlantForm}>{showEditPlantForm ? "Hide Form" : "Edit Plant"}
     </button>
-              {showEditPlantForm && <EditPlant plant={plant} setPlant={setPlant} />}
-
+      {showEditPlantForm && <EditPlant plant={plant} setPlant={setPlant} />}
     <section className='user-plant-dashboard'>
-    {/* <button onClick={toggleEditPlantForm}>
-              {showEditPlantForm ? "Hide Form" : "Edit Plant"}
-            </button>
-              {showEditPlantForm && <EditPlant plant={plant} />} */}
-    {plant.imageurl ? <img className="plant-details-img" src={plant.imageurl} alt={plant.name} /> : <img src={'https://st2.depositphotos.com/3904951/8925/v/450/depositphotos_89250312-stock-illustration-photo-picture-web-icon-in.jpg'} alt={plant.name} />}
-    
+      {plant.imageurl ? <img className="plant-details-img" src={plant.imageurl} alt={plant.name} /> : <img src={'https://st2.depositphotos.com/3904951/8925/v/450/depositphotos_89250312-stock-illustration-photo-picture-web-icon-in.jpg'} alt={plant.name} />}
         <div className="plant-details">
           <p>
             <strong>Name:</strong> {plant.name}
@@ -104,10 +103,14 @@ const UsersPlant = ({ handleLogout }) => {
           <p>
             <strong>Care Instructions:</strong> {plant.careinstructions}
           </p>
+
           <button>
             <Link to={`/plant/${plant.id}/carelogs`}>Plant Care Logs</Link>
           </button>
-          
+          <button onClick={openModal} className='delete-button'>
+              Delete
+          </button>
+          <Modal isOpen={isModalOpen} onCancel={closeModal} onConfirm={() => handleDeletePlant(user.id, plant.id)} />
         </div>
     </section>
     </>

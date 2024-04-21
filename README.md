@@ -5,20 +5,26 @@
 
 Welcome to <strong>Garden Nook</strong>! This application helps you keep track of your plants and their care routines. Whether you're a seasoned plant parent or just starting out, this app will assist you in providing the best care for your green friends.
 
-To use the web application navigate to: 
+To use the web application navigate to: (netlify link goes here)
+
+The data looks like this: (put the render link here)
 ---
 ### Getting Started
 
-To get started with the Plant Care Application in your local machine, follow these steps:
+To get started with the Plant Care Application on your local machine follow these steps:
 
 1. **Clone the Repository:** 
-   Fork then clone this frontend repository to your local machine using the following command:
+   Navigate to the front end repository: https://github.com/JuliGarc91/jwt-auth-frontend and follow these instructions:
+
+   Fork and clone this **frontend repository** to your local machine using the following command:
    ```
    git clone https://github.com/JuliGarc91/jwt-auth-frontend.git
    ```
    
 2. **Set Up the Database:**
-    Fork then clone the backend repository [here](https://github.com/JuliGarc91/jwt-auth-backend) to your local machine using the following command:
+   navigate to https://github.com/JuliGarc91/jwt-auth-backend and follow these instructions:
+
+   Fork and clone the **backend repository** to your local machine using the following command:
    ```
    git clone https://github.com/JuliGarc91/jwt-auth-backend.git
    ```

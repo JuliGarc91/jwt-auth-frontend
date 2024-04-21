@@ -6,7 +6,8 @@ const URL = import.meta.env.VITE_BASE_URL
 const UsersPlants = () => {
   const [userPlants, setUserPlants] = useState([]);
   const [showAddPlantForm, setShowAddPlantForm] = useState(false);
-  const { user } = useOutletContext(); // Access user data provided by the Outlet's context
+
+  const { user } = useOutletContext();
 
   const toggleAddPlant = () => {
     setShowAddPlantForm(!showAddPlantForm);
@@ -29,22 +30,6 @@ const UsersPlants = () => {
     fetchUserPlants();
   }, [user.id]);
 
-  const handleDeletePlant = async (userId, plantId) => {
-    try {
-      const response = await fetch(`${URL}/api/users/${userId}/userPlants/${plantId}`, {
-        method: 'DELETE',
-      });
-
-      if (response.ok) {
-        setUserPlants(userPlants.filter(plant => plant.id !== plantId));
-      } else {
-        console.error('Failed to delete user plant:');
-      }
-    } catch (error) {
-      console.error("Error deleting user's plant:", error);
-    }
-  };
-
   // add pie chart for flowering vs non-flowering plants like ferns - reuse code in careLogs.jsx but change chart type to pieChart and pie
 
   return (
@@ -65,12 +50,6 @@ const UsersPlants = () => {
             <div>
               <strong>Name:</strong> {plant.name}
             </div>
-            <div>
-              <strong>Flowering Plant? </strong> {!plant.isfloweringplant ? "" : (plant.isfloweringplant ? "Yes" : "No")}
-            </div>
-            <button onClick={() => handleDeletePlant(user.id, plant.id)} className='delete-button'>
-              Delete
-            </button>
             <button>
               <Link to={`/plant/${plant.id}`}>View More Details</Link>
             </button>

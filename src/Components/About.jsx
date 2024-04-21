@@ -1,5 +1,3 @@
-import React from 'react'
-
 const About = () => {
   return (
     <section className='about'>
@@ -12,12 +10,10 @@ const About = () => {
             </a>
         </div>
         <em>Programmer & Plant Enthusiast</em>
-        
         <p>
             <strong>Garden Nook</strong> is inspired by my desire to cultivate and share the herbs my family and I incorporate in our everyday dishes and natural remedies.
         </p>
      </div>
-     
     </section>
 
   )
