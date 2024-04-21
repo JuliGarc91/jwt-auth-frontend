@@ -5,9 +5,8 @@
 
 Welcome to <strong>Garden Nook</strong>! This application helps you keep track of your plants and their care routines. Whether you're a seasoned plant parent or just starting out, this app will assist you in providing the best care for your green friends.
 
-To use the web application navigate to: (netlify link goes here)
+To use the web application navigate to: https://gardennook.netlify.app/
 
-The data looks like this: (put the render link here)
 ---
 ### Getting Started
 
