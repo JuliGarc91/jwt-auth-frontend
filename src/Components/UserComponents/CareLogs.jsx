@@ -32,7 +32,11 @@ const CareLogs = ( { handleLogout } ) => {
         setIsTableMode(prevMode => !prevMode);
     };
 
-    
+    // when adde carelog component is ready add as prop
+    // const handleCareLog = (newCareLog) => {
+    //   setUserPlants([...careLogs, newCareLog]);
+    // };
+
     const handleDelete = (id) => {
       fetch(`${URL}/api/users/${user.id}/userPlants/${plantId}/carelogs/${id}`, {
         method: "DELETE",
